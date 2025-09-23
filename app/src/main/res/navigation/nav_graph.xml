@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.hin.flixcomix.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.hin.flixcomix.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.hin.flixcomix.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.hin.flixcomix.ui.search.SearchFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.hin.flixcomix.ui.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail" />
+
+    <fragment
+        android:id="@+id/navigation_comment"
+        android:name="com.hin.flixcomix.ui.comment.CommentFragment"
+        tools:layout="@layout/fragment_comment" />
+
+    <fragment
+        android:id="@+id/navigation_watch"
+        android:name="com.hin.flixcomix.ui.watch.WatchFragment"
+        tools:layout="@layout/fragment_watch" />
+
+    <action
+        android:id="@+id/action_watchFragment"
+        app:destination="@id/navigation_watch"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_commentFragment"
+        app:destination="@id/navigation_comment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_searchFragment"
+        app:destination="@id/navigation_search"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_detailFragment"
+        app:destination="@id/navigation_detail"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+</navigation>

@@ -1,0 +1,21 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tvContent"
+        style="@style/text_12_500"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="?attr/text_color_head_2" />
+
+    <TextView
+        android:id="@+id/tvToggle"
+        style="@style/text_12_500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:text="@string/view_more"
+        android:textColor="@color/orange" />
+</merge>

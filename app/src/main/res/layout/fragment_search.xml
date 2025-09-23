@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.search.SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="12dp"
+                android:background="@null"
+                android:contentDescription="@string/back"
+                android:src="@drawable/arrow_left"
+                app:backgroundTint="@null" />
+
+            <EditText
+                android:id="@+id/editTxtSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:background="@drawable/selector_edit_text_bg"
+                android:drawableStart="@drawable/search"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/selector_color_edit_text"
+                android:hint="@string/search_movie"
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="18dp"
+                android:textColor="?attr/text_color_head_1"
+                android:textSize="14dp"
+                tools:ignore="SpUsage" />
+
+            <ImageButton
+                android:id="@+id/btnFilter"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/button_bg_8"
+                android:contentDescription="@string/button_filter"
+                android:src="@drawable/filter_bold"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_search_not_found" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="?attr/color_background_second">
+        <include android:id="@+id/includeFilter" layout="@layout/layout_drawer_end_filter" />
+    </FrameLayout>
+
+</FrameLayout>

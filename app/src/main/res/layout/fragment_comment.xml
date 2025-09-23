@@ -1,0 +1,98 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        app:alignItems="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/back"
+            android:src="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/txtComment"
+            style="@style/text_24_700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/comments"
+            android:textColor="?attr/text_color_head_1" />
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:nestedScrollingEnabled="true"
+        android:paddingHorizontal="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/inputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_comment" />
+
+    <LinearLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/action_drawer_bg"
+        android:orientation="horizontal"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/selector_edit_text_bg"
+            android:drawableEnd="@drawable/sticker"
+            android:drawableTint="@color/selector_color_edit_text"
+            android:fontFamily="@font/urbanist_semibold"
+            android:hint="@string/add_comment"
+            android:inputType="text"
+            android:paddingHorizontal="20dp"
+            android:textColorHint="@color/gray_500"
+            android:textSize="14dp"
+            tools:ignore="SpUsage" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="12dp"
+            app:cardBackgroundColor="@color/orange"
+            app:cardCornerRadius="100dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/send"
+                android:scaleType="fitCenter"
+                android:src="@drawable/send_bold"
+                app:tint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

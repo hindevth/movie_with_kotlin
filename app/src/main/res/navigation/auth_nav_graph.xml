@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@+id/signInWithSocial">
+
+    <!-- Sign in with social -->
+    <fragment
+        android:id="@+id/signInWithSocial"
+        android:name="com.hin.flixcomix.ui.sigin_in_social.SignInSocialFragment"
+        android:label="Sign in with social" />
+
+    <!-- Sign in -->
+    <fragment
+        android:id="@+id/signInPasswordFragment"
+        android:name="com.hin.flixcomix.ui.sign_in_password.SignInPasswordFragment"
+        android:label="Sign Up" />
+
+    <!-- Sign up -->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.hin.flixcomix.ui.sign_up.SignUpFragment"
+        android:label="Sign Up" />
+
+    <!-- Forgot password -->
+    <fragment
+        android:id="@+id/forgotFragment"
+        android:name="com.hin.flixcomix.ui.forgot_password.ForgotPasswordFragment"
+        android:label="Forgot Password" />
+
+    <!-- Enter PIN -->
+    <fragment
+        android:id="@+id/enterPinFragment"
+        android:name="com.hin.flixcomix.ui.enter_otp.EnterPinFragment"
+        android:label="Enter Pin" />
+
+    <!--  New Password  -->
+    <fragment
+        android:id="@+id/newPasswordFragment"
+        android:name="com.hin.flixcomix.ui.new_password.NewPasswordFragment"
+        android:label="New Password" />
+
+    <!--  Action  -->
+    <action
+        android:id="@+id/action_sign_in_social"
+        app:destination="@+id/signInWithSocial"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_sign_in_password"
+        app:destination="@+id/signInPasswordFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_sign_up_password"
+        app:destination="@+id/signUpFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_forgotFragment"
+        app:destination="@id/forgotFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_enterPinFragment"
+        app:destination="@id/enterPinFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_newPassword"
+        app:destination="@id/newPasswordFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+</navigation>

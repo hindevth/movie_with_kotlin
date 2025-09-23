@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_gradient_bg"
+            android:rotation="180" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/back"
+                android:src="@drawable/arrow_left"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/text_20_700"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btnEpisode"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="24dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/episode"
+                android:src="@drawable/episode"
+                app:tint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btnMore"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/more"
+                android:src="@drawable/more"
+                app:tint="@color/white" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/shadow_gradient_bg"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="24dp">
+        <!-- Time bar -->
+        <androidx.media3.ui.DefaultTimeBar
+            android:id="@id/exo_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnVolume"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/volume"
+                android:src="@drawable/volume"
+                app:tint="@android:color/white" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <!-- Rewind -->
+                <ImageButton
+                    android:id="@id/exo_rew"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/backward"
+                    android:src="@drawable/backward"
+                    app:tint="@android:color/white" />
+
+                <!-- Play / Pause -->
+                <ImageButton
+                    android:id="@id/exo_play_pause"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/play2"
+                    android:contentDescription="@string/play"
+                    app:tint="@android:color/white" />
+
+                <!-- Forward -->
+                <ImageButton
+                    android:id="@id/exo_ffwd"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/forward"
+                    android:contentDescription="@string/forward"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+            <!-- Fullscreen button -->
+            <ImageButton
+                android:id="@+id/btn_fullscreen"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/fullscreen"
+                android:src="@drawable/fullscreen"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

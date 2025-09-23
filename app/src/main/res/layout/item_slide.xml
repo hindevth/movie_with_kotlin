@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="categories"
+            type="String" />
+    </data>
+
+    <com.google.android.material.carousel.MaskableFrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.None">
+
+        <ImageView
+            android:id="@+id/imageView"
+            imageUrl="@{imageUrl}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_movie"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@drawable/shadow_gradient_bg"
+            android:rotation="180" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow_gradient_bg" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/urbanist_bold"
+                android:maxLines="1"
+                android:text="@{name}"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/txtCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/urbanist_medium"
+                android:text="@{categories}"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                tools:ignore="SpUsage" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnPlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/play"
+                        android:src="@drawable/play" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:text="@string/play"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        tools:ignore="SpUsage" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnMyList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/button_outline_bg"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/my_list"
+                        android:src="@drawable/plus" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/urbanist_semibold"
+                        android:text="@string/my_list"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        tools:ignore="SpUsage" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.carousel.MaskableFrameLayout>
+</layout>
