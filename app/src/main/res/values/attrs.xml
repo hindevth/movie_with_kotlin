@@ -17,5 +17,6 @@
     <attr name="color_background_div" format="color" />
     <attr name="color_background_button" format="color" />
     <attr name="color_background_button_status" format="color" />
+    <attr name="color_background_300_dark" format="color" />
     <attr name="color_indicator" format="color" />
 </resources>

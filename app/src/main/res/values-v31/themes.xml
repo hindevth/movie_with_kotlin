@@ -23,6 +23,7 @@
         <item name="color_background_second">@color/gray_100</item>
         <item name="color_background_third">@color/white</item>
         <item name="color_background_div">@color/gray_200</item>
+        <item name="color_background_300_dark">@color/gray_300</item>
 
         <item name="color_primary_orange">@color/orange</item>
         <item name="color_disable_orange">@color/orange_status</item>

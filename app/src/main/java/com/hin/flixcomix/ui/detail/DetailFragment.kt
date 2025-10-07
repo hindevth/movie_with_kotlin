@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
@@ -42,8 +43,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         tabLayoutMediator =
             TabLayoutMediator(binding.tabLayout, binding.viewPaper) { tab, position ->
                 tab.text = when (position) {
-                    0 -> "More Like This"
-                    else -> "Comments"
+                    0 -> ContextCompat.getString(requireContext(),R.string.more_like_this)
+                    else -> ContextCompat.getString(requireContext(),R.string.comments)
                 }
             }.apply { attach() }
     }

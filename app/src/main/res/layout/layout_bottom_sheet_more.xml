@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/background_bottom_sheet"
+    android:paddingHorizontal="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="38dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_drag_bottom_sheet"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        style="@style/text_24_700"
+        android:textColor="?attr/text_color_head_1"
+        android:textAlignment="center"
+        android:paddingVertical="24dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_drag_bottom_sheet"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/btnSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/speed"
+                android:contentDescription="@string/speed"
+                app:tint="?attr/text_color_head_2"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/speed"
+                style="@style/text_16_700"
+                android:textColor="?attr/text_color_head_2" />
+            <TextView
+                android:id="@+id/txtSpeed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:textAlignment="textEnd"
+                android:text="@string/normal"
+                style="@style/text_16_700"
+                android:textColor="?attr/text_color_head_2" />
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/arrow_right"
+                android:contentDescription="@string/speed"
+                app:tint="?attr/text_color_head_2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btnTimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/time_circle"
+                android:contentDescription="@string/timer"
+                app:tint="?attr/text_color_head_2"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/timer"
+                style="@style/text_16_700"
+                android:textColor="?attr/text_color_head_2" />
+            <TextView
+                android:id="@+id/txtTimer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:textAlignment="textEnd"
+                android:text="@string/off"
+                style="@style/text_16_700"
+                android:textColor="?attr/text_color_head_2" />
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/arrow_right"
+                android:contentDescription="@string/speed"
+                app:tint="?attr/text_color_head_2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btnCast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/cast"
+                android:contentDescription="@string/timer"
+                app:tint="?attr/text_color_head_2"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/cast_video"
+                style="@style/text_16_700"
+                android:textColor="?attr/text_color_head_2" />
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/arrow_right"
+                android:contentDescription="@string/speed"
+                app:tint="?attr/text_color_head_2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

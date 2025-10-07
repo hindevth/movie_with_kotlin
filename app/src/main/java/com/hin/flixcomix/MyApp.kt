@@ -1,6 +1,7 @@
 package com.hin.flixcomix
 
 import android.app.Application
+import com.hin.flixcomix.utils.PrefixTree
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -9,7 +10,7 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            Timber.plant(PrefixTree())
         }
     }
 }

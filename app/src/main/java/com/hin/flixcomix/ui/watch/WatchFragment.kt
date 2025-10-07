@@ -1,87 +1,150 @@
 package com.hin.flixcomix.ui.watch
 
-import android.content.pm.ActivityInfo
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
+import androidx.annotation.OptIn
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.hin.flixcomix.R
 import com.hin.flixcomix.data.entities.Movie
 import com.hin.flixcomix.data.entities.Server
 import com.hin.flixcomix.databinding.FragmentWatchBinding
 import com.hin.flixcomix.ui.base.BaseFragment
+import com.hin.flixcomix.ui.custom.exo_player.ExoEventListener
+import com.hin.flixcomix.ui.custom.exo_player.data.Timer
+import com.hin.flixcomix.ui.detail.adapter.AdapterPaperSuggest
+import com.hin.flixcomix.ui.watch.adapter.AdapterServer
 import com.hin.flixcomix.utils.extensions.getParcelableCompat
 import com.hin.flixcomix.utils.extensions.getParcelableListCompat
+import timber.log.Timber
+import kotlin.collections.random
+
 
 class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::inflate) {
-    private val viewModel: WatchViewModel by viewModels()
-    private var isFullScreen = false
-    private var isMuted = false
-    private lateinit var player: ExoPlayer
+    private val viewModel: WatchViewModel by activityViewModels()
+    private var tabLayoutMediator: TabLayoutMediator? = null
+
+    @OptIn(UnstableApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
         val movie = arguments?.getParcelableCompat<Movie>("movie")
         val server = arguments?.getParcelableListCompat<Server>("servers")
-        player = ExoPlayer.Builder(requireContext()).build().also { exoPlayer ->
-            binding.exoPlayer.player = exoPlayer
-            exoPlayer.setMediaItem(
-                MediaItem.fromUri("https://s6.kkphimplayer6.com/20250921/5o5dsiiN/index.m3u8")
-            )
-            exoPlayer.prepare()
-            exoPlayer.playWhenReady = true
-        }
 
-        binding.exoPlayer.findViewById<TextView>(R.id.txtTitle).text = movie?.name
-        binding.exoPlayer.findViewById<ImageButton>(R.id.btnVolume).setOnClickListener {
-            player.volume = if (player.volume == 0f) 1f else 0f
-            isMuted = !isMuted
-            binding.exoPlayer.findViewById<ImageButton>(R.id.btnVolume).setImageResource(
-                if (isMuted) R.drawable.volume_off else R.drawable.volume
-            )
-        }
+        viewModel.setMovie(movie)
+        viewModel.setServers(server)
 
-        val fullscreenButton: ImageButton =
-            binding.exoPlayer.findViewById(R.id.btn_fullscreen)
-
-        fullscreenButton.setOnClickListener {
-            if (isFullScreen) {
-                exitFullScreen()
-                fullscreenButton.setImageResource(R.drawable.fullscreen)
-            } else {
-                enterFullScreen()
-                fullscreenButton.setImageResource(R.drawable.collapse)
+        if (viewModel.videoState.value?.exoPlayer == null) {
+            val player = ExoPlayer.Builder(requireContext()).build().also { exoPlayer ->
+                binding.exoPlayer.player = exoPlayer
+                exoPlayer.setMediaItem(
+                    MediaItem.fromUri(
+                        server?.firstOrNull()?.episodes?.firstOrNull()?.linkM3u8 ?: ""
+                    )
+                )
+                exoPlayer.prepare()
             }
-            isFullScreen = !isFullScreen
+            player.addListener(videoListener)
+            binding.exoPlayer.setup(player, parentFragmentManager)
+            viewModel.setExoPlayer(player)
+        }else{
+            binding.exoPlayer.setup(viewModel.videoState.value?.exoPlayer, parentFragmentManager)
+        }
+
+        viewModel.videoState.observe(viewLifecycleOwner) { state ->
+            binding.exoPlayer.setSleepEndTime(state.sleepEndTime)
+            binding.exoPlayer.setTimerSelected(state.timer)
+        }
+
+        binding.exoPlayer.setTitle(movie?.name!!)
+        onClick()
+        init()
+    }
+
+    private fun init(){
+        val movie = arguments?.getParcelableCompat<Movie>("movie")
+        val server = arguments?.getParcelableListCompat<Server>("servers")
+
+        val adapterServer = AdapterServer()
+        adapterServer.submitList(server)
+        binding.recyclerViewServer.adapter = adapterServer
+
+        binding.viewPaper.adapter =
+            AdapterPaperSuggest(this, movie?.category?.random()?.slug, movie?.slug.toString())
+        tabLayoutMediator =
+            TabLayoutMediator(binding.tabLayout, binding.viewPaper) { tab, position ->
+                tab.text = when (position) {
+                    0 -> ContextCompat.getString(requireContext(),R.string.more_like_this)
+                    else -> ContextCompat.getString(requireContext(),R.string.comments)
+                }
+            }.apply { attach() }
+    }
+
+    private val videoListener = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            val state = viewModel.videoState.value
+            if (state?.timer?.value == state?.exoPlayer?.duration && playbackState == Player.STATE_ENDED) {
+                binding.exoPlayer.keepScreenOn = false
+                state?.exoPlayer?.pause()
+                Timber.e("End")
+            }
         }
     }
 
-    private fun enterFullScreen() {
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        requireActivity().window.decorView.systemUiVisibility =
-            (View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    @OptIn(UnstableApi::class)
+    fun onClick() {
+        binding.exoPlayer.setExoEventListener(object : ExoEventListener {
+            override fun onBack() {
+                popNavigate()
+            }
+
+            override fun onFullScreen() {
+                PlayerView.switchTargetView(
+                    viewModel.videoState.value?.exoPlayer!!,
+                    binding.exoPlayer,
+                    null
+                )
+                navigateTo(R.id.action_watchFullScreenFragment)
+            }
+
+            override fun setSleepTimer(timer: Timer) {
+                viewModel.setSleepTimer(timer.value)
+                viewModel.setTimer(timer)
+            }
+
+            override fun setPlayBackSpeed(speed: Float) {
+                viewModel.setPlaySpeed(speed)
+            }
+
+        })
     }
 
-    private fun exitFullScreen() {
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+    @OptIn(UnstableApi::class)
+    override fun onResume() {
+        super.onResume()
+        viewModel.videoState.value?.exoPlayer?.let { player ->
+            PlayerView.switchTargetView(player, null, binding.exoPlayer)
+        }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        player.play()
-//    }
-
+    @OptIn(UnstableApi::class)
+    override fun onDestroyView() {
+        binding.exoPlayer.cleanup()
+        super.onDestroyView()
+    }
 
     override fun onDestroy() {
-        player.release()
+        viewModel.videoState.value?.exoPlayer?.removeListener(videoListener)
+        viewModel.videoState.value?.exoPlayer?.release()
+        viewModel.setExoPlayer(null)
         super.onDestroy()
     }
 }

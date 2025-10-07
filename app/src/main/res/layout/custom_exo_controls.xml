@@ -19,8 +19,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:padding="24dp">
 
             <ImageButton
@@ -34,9 +34,9 @@
 
             <TextView
                 android:id="@+id/txtTitle"
+                style="@style/text_20_700"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/text_20_700"
                 android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
@@ -47,10 +47,11 @@
                 android:id="@+id/btnEpisode"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/episode"
                 android:src="@drawable/episode"
+                android:visibility="gone"
                 app:tint="@color/white" />
 
             <ImageButton
@@ -72,12 +73,41 @@
         android:gravity="bottom"
         android:orientation="vertical"
         android:padding="24dp">
-        <!-- Time bar -->
-        <androidx.media3.ui.DefaultTimeBar
-            android:id="@id/exo_progress"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtCurrentTime"
+                style="@style/text_14_600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_00_00"
+                android:textColor="@color/white" />
+
+            <androidx.media3.ui.DefaultTimeBar
+                android:id="@id/exo_progress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="8dp"
+                app:buffered_color="@color/gray_800"
+                app:played_color="@color/orange"
+                app:scrubber_color="@color/orange"
+                app:unplayed_color="@color/gray_600" />
+
+            <TextView
+                android:id="@+id/txtEndTime"
+                style="@style/text_14_600"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_00_00"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,7 +132,7 @@
                 android:orientation="horizontal">
                 <!-- Rewind -->
                 <ImageButton
-                    android:id="@id/exo_rew"
+                    android:id="@+id/btnBackWard"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -112,22 +142,22 @@
 
                 <!-- Play / Pause -->
                 <ImageButton
-                    android:id="@id/exo_play_pause"
+                    android:id="@+id/btnPlayPause"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/play2"
                     android:contentDescription="@string/play"
+                    android:src="@drawable/play2"
                     app:tint="@android:color/white" />
 
                 <!-- Forward -->
                 <ImageButton
-                    android:id="@id/exo_ffwd"
+                    android:id="@+id/btnForward"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/forward"
                     android:contentDescription="@string/forward"
+                    android:src="@drawable/forward"
                     app:tint="@android:color/white" />
             </LinearLayout>
             <!-- Fullscreen button -->

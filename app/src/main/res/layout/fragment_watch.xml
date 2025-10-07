@@ -1,31 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.watch.WatchFragment">
 
-    <androidx.media3.ui.PlayerView
-        android:id="@+id/exoPlayer"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hin.flixcomix.ui.watch.WatchViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:keepScreenOn="true"
-        app:resize_mode="fit"
-        app:controller_layout_id="@layout/custom_exo_controls"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_comment"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/exoPlayer"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.hin.flixcomix.ui.custom.exo_player.ExoPlayerVideo
+                    android:id="@+id/exoPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:controller_layout_id="@layout/custom_exo_controls"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:resize_mode="fit" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewServer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:paddingHorizontal="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/exoPlayer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    style="@style/text_16_600"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="true"
+                    app:backgroundTint="@null"
+                    app:tabBackground="@android:color/transparent"
+                    app:tabIndicatorColor="@color/orange"
+                    app:tabIndicatorFullWidth="true"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@color/orange"
+                    app:tabTextAppearance="@style/TabLayoutTextAppearance"
+                    app:tabTextColor="@color/gray_700" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPaper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

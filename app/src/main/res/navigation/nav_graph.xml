@@ -44,6 +44,19 @@
         android:name="com.hin.flixcomix.ui.watch.WatchFragment"
         tools:layout="@layout/fragment_watch" />
 
+    <fragment
+        android:id="@+id/navigation_watch_fullscreen"
+        android:name="com.hin.flixcomix.ui.watch.FullScreenPlayerFragment"
+        tools:layout="@layout/fragment_full_screen_player" />
+
+    <action
+        android:id="@+id/action_watchFullScreenFragment"
+        app:destination="@id/navigation_watch_fullscreen"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
     <action
         android:id="@+id/action_watchFragment"
         app:destination="@id/navigation_watch"

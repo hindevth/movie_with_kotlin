@@ -24,6 +24,7 @@
         <item name="color_background_div">@color/dark_3</item>
         <item name="color_background_button">@color/dark_3</item>
         <item name="color_background_button_status">@color/gray_700</item>
+        <item name="color_background_300_dark">@color/dark_3</item>
 
         <item name="color_primary_orange">@color/orange</item>
         <item name="color_disable_orange">@color/orange_status</item>
