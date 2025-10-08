@@ -16,10 +16,11 @@ import com.hin.flixcomix.data.entities.Movie
 import com.hin.flixcomix.data.entities.Server
 import com.hin.flixcomix.databinding.FragmentWatchBinding
 import com.hin.flixcomix.ui.base.BaseFragment
+import com.hin.flixcomix.ui.base.SpaceItemDecoration
 import com.hin.flixcomix.ui.custom.exo_player.ExoEventListener
 import com.hin.flixcomix.ui.custom.exo_player.data.Timer
 import com.hin.flixcomix.ui.detail.adapter.AdapterPaperSuggest
-import com.hin.flixcomix.ui.watch.adapter.AdapterServer
+import com.hin.flixcomix.ui.watch.adapter.AdapterPaperServer
 import com.hin.flixcomix.utils.extensions.getParcelableCompat
 import com.hin.flixcomix.utils.extensions.getParcelableListCompat
 import timber.log.Timber
@@ -52,16 +53,17 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
                 )
                 exoPlayer.prepare()
             }
-            player.addListener(videoListener)
+//            player.addListener(videoListener)
             binding.exoPlayer.setup(player, parentFragmentManager)
             viewModel.setExoPlayer(player)
-        }else{
+        } else {
             binding.exoPlayer.setup(viewModel.videoState.value?.exoPlayer, parentFragmentManager)
         }
 
         viewModel.videoState.observe(viewLifecycleOwner) { state ->
             binding.exoPlayer.setSleepEndTime(state.sleepEndTime)
             binding.exoPlayer.setTimerSelected(state.timer)
+            binding.exoPlayer.player?.addListener(videoListener)
         }
 
         binding.exoPlayer.setTitle(movie?.name!!)
@@ -69,27 +71,23 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
         init()
     }
 
-    private fun init(){
+    private fun init() {
         val movie = arguments?.getParcelableCompat<Movie>("movie")
-        val server = arguments?.getParcelableListCompat<Server>("servers")
+        val servers = arguments?.getParcelableListCompat<Server>("servers")
 
-        val adapterServer = AdapterServer()
-        adapterServer.submitList(server)
-        binding.recyclerViewServer.adapter = adapterServer
-
-        binding.viewPaper.adapter =
-            AdapterPaperSuggest(this, movie?.category?.random()?.slug, movie?.slug.toString())
-        tabLayoutMediator =
-            TabLayoutMediator(binding.tabLayout, binding.viewPaper) { tab, position ->
-                tab.text = when (position) {
-                    0 -> ContextCompat.getString(requireContext(),R.string.more_like_this)
-                    else -> ContextCompat.getString(requireContext(),R.string.comments)
-                }
-            }.apply { attach() }
+        if (tabLayoutMediator == null && servers != null) {
+            binding.viewPaper.adapter =
+                AdapterPaperServer(this, servers)
+            tabLayoutMediator =
+                TabLayoutMediator(binding.tabLayout, binding.viewPaper) { tab, position ->
+                    tab.text = servers[position].name
+                }.apply { attach() }
+        }
     }
 
     private val videoListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
+            Timber.e("$playbackState 0000")
             val state = viewModel.videoState.value
             if (state?.timer?.value == state?.exoPlayer?.duration && playbackState == Player.STATE_ENDED) {
                 binding.exoPlayer.keepScreenOn = false
@@ -138,6 +136,9 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
     @OptIn(UnstableApi::class)
     override fun onDestroyView() {
         binding.exoPlayer.cleanup()
+        viewModel.videoState.value?.exoPlayer?.removeListener(videoListener)
+        tabLayoutMediator?.detach()
+        tabLayoutMediator = null
         super.onDestroyView()
     }
 

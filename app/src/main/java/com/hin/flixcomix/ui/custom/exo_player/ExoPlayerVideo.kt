@@ -29,6 +29,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.ref.WeakReference
 
 @UnstableApi
 class ExoPlayerVideo @OptIn(UnstableApi::class)
@@ -97,12 +98,19 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
     }
     fun cleanup() {
         player?.removeListener(onListener)
-        binding.exoProgress.removeListener(onTimeBarListener)
+        player?.release()
         player = null
-        fragmentManager = null
+
         updateJob?.cancel()
         updateJob = null
         cancel()
+
+        hideHandler.removeCallbacksAndMessages(null)
+
+        binding.exoProgress.removeListener(onTimeBarListener)
+
+        fragmentManager = null
+        exoEventListener = null
     }
 
     fun showControls() {
@@ -137,15 +145,17 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
         }
 
     }
+    private val weakSelf = WeakReference(this)
     private val onListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
+            val self = weakSelf.get() ?: return
             Timber.e("playbackState $playbackState")
             if (playbackState == Player.STATE_READY) {
                 Timber.e("STATE_READY1")
-                isReady = true
-                binding.txtEndTime.text = player?.duration?.toTimeFormat()
-                updateJob?.cancel()
-                updateJob = launch {
+                self.isReady = true
+                self.binding.txtEndTime.text = player?.duration?.toTimeFormat()
+                self.updateJob?.cancel()
+                self.updateJob = launch {
                     while (true){
                         updateTimeBar()
                         delay(1000)
@@ -158,19 +168,20 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
+            val self = weakSelf.get() ?: return
             if (isPlaying) {
-                keepScreenOn = true
-                binding.btnPlayPause.setImageResource(R.drawable.pause)
+                self.keepScreenOn = true
+                self.binding.btnPlayPause.setImageResource(R.drawable.pause)
             } else {
-                keepScreenOn = false
-                binding.btnPlayPause.setImageResource(R.drawable.play2)
+                self.keepScreenOn = false
+                self.binding.btnPlayPause.setImageResource(R.drawable.play2)
             }
         }
     }
 
     override fun onDetachedFromWindow() {
-        cleanup()
         super.onDetachedFromWindow()
+//        cleanup()
     }
 
     private fun onClick() {

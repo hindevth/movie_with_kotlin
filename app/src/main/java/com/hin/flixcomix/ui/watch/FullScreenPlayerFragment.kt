@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.annotation.OptIn
 import androidx.fragment.app.activityViewModels
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import com.hin.flixcomix.R
@@ -14,8 +15,10 @@ import com.hin.flixcomix.databinding.FragmentFullScreenPlayerBinding
 import com.hin.flixcomix.ui.base.BaseFragment
 import com.hin.flixcomix.ui.custom.exo_player.ExoEventListener
 import com.hin.flixcomix.ui.custom.exo_player.data.Timer
+import timber.log.Timber
 
-class FullScreenPlayerFragment() : BaseFragment<FragmentFullScreenPlayerBinding>(FragmentFullScreenPlayerBinding::inflate) {
+class FullScreenPlayerFragment() :
+    BaseFragment<FragmentFullScreenPlayerBinding>(FragmentFullScreenPlayerBinding::inflate) {
     private val viewModel: WatchViewModel by activityViewModels()
 
     @OptIn(UnstableApi::class)
@@ -29,23 +32,44 @@ class FullScreenPlayerFragment() : BaseFragment<FragmentFullScreenPlayerBinding>
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
         viewModel.videoState.observe(viewLifecycleOwner) { state ->
+            binding.exoPlayerVideo.player?.addListener(videoListener)
             binding.exoPlayerVideo.setSleepEndTime(state.sleepEndTime)
             binding.exoPlayerVideo.setTimerSelected(state.timer)
-            binding.exoPlayerVideo.setup(viewModel.videoState.value?.exoPlayer, parentFragmentManager)
-            binding.exoPlayerVideo.findViewById<ImageButton>(R.id.btn_fullscreen).setImageResource(R.drawable.collapse)
+            binding.exoPlayerVideo.setup(
+                viewModel.videoState.value?.exoPlayer,
+                parentFragmentManager
+            )
+            binding.exoPlayerVideo.findViewById<ImageButton>(R.id.btn_fullscreen)
+                .setImageResource(R.drawable.collapse)
             binding.exoPlayerVideo.showEpisode()
             binding.exoPlayerVideo.setTitle(viewModel.movie.value?.name!!)
             binding.exoPlayerVideo.setSpeed(viewModel.videoState.value?.playbackSpeed)
             binding.exoPlayerVideo.setExoEventListener(playerListener)
-            if (binding.exoPlayerVideo.player == null && state.exoPlayer != null){
+            if (binding.exoPlayerVideo.player == null && state.exoPlayer != null) {
                 binding.exoPlayerVideo.setup(state.exoPlayer, parentFragmentManager)
             }
         }
 
-        PlayerView.switchTargetView(viewModel.videoState.value?.exoPlayer!!, null, binding.exoPlayerVideo)
+        PlayerView.switchTargetView(
+            viewModel.videoState.value?.exoPlayer!!,
+            null,
+            binding.exoPlayerVideo
+        )
     }
 
-    private val playerListener = object : ExoEventListener{
+    private val videoListener = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            Timber.e("$playbackState 111")
+            val state = viewModel.videoState.value
+            if (state?.timer?.value == state?.exoPlayer?.duration && playbackState == Player.STATE_ENDED) {
+                binding.exoPlayerVideo.keepScreenOn = false
+                state?.exoPlayer?.pause()
+                Timber.e("End")
+            }
+        }
+    }
+
+    private val playerListener = object : ExoEventListener {
         override fun onBack() {
             popNavigate()
         }
@@ -68,6 +92,7 @@ class FullScreenPlayerFragment() : BaseFragment<FragmentFullScreenPlayerBinding>
     override fun onDestroyView() {
         viewModel.videoState.value?.exoPlayer.let { player ->
             PlayerView.switchTargetView(player!!, binding.exoPlayerVideo, null)
+            player.removeListener(videoListener)
             binding.exoPlayerVideo.cleanup()
         }
 

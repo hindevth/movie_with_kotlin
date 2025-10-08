@@ -14,5 +14,4 @@ class AdapterPaperSuggest(fm: Fragment, val slugGenre: String?, val slugMovie: S
     }
 
     override fun getItemCount(): Int  = 2
-
 }
