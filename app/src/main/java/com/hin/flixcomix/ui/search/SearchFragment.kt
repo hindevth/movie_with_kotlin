@@ -5,6 +5,8 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -73,12 +75,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
         })
 
+        binding.editTxtSearch.doAfterTextChanged {
+            viewModel.setSearch(it.toString().trim())
+        }
+
         viewModel.filterData.observe(viewLifecycleOwner) { filterState ->
             adapterSort.setSelectedItem(filterState.sort)
             adapterGenre.setSelectedItem(filterState.genre)
             adapterRegion.setSelectedItem(filterState.country)
 
-            binding.includeFilter.btnApply.isEnabled = filterState.hasAnyFilter()
             binding.includeFilter.btnReset.isEnabled = filterState.hasAnyFilter()
         }
     }
@@ -99,6 +104,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.btnFilter.setOnClickListener { showDrawer() }
         binding.includeFilter.btnBack.setOnClickListener { popNavigate() }
         binding.includeFilter.btnReset.setOnClickListener { viewModel.resetFilter() }
+        binding.includeFilter.btnApply.setOnClickListener { viewModel.fetchSearchAndFilter() }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (binding.drawerLayout.translationX == 0f) {

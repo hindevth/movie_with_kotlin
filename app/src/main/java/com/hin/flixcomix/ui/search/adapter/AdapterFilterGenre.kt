@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.hin.flixcomix.R
 import com.hin.flixcomix.data.entities.Country
 import com.hin.flixcomix.data.entities.Genre
@@ -47,7 +48,10 @@ class AdapterFilterGenre :
         fun bind(item: Genre) {
             binding.btnFilter.text = item.name
             toggleButton(selected?.slug == item.slug)
-
+            val lp = binding.btnFilter.layoutParams
+            if (lp is FlexboxLayoutManager.LayoutParams){
+                lp.flexGrow = 1.0f
+            }
             binding.btnFilter.setOnClickListener {
                 onListener?.onClick(item)
             }

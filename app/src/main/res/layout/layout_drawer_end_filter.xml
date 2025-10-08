@@ -143,7 +143,6 @@
             android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
-            android:enabled="false"
             android:fontFamily="@font/urbanist_bold"
             android:text="@string/apply"
             android:textAllCaps="false"
