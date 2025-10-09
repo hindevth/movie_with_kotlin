@@ -11,10 +11,12 @@ import com.hin.flixcomix.R
 import com.hin.flixcomix.data.entities.Movie
 import com.hin.flixcomix.databinding.FragmentHomeBinding
 import com.hin.flixcomix.ui.base.BaseFragment
+import com.hin.flixcomix.ui.base.SpaceItemDecoration
 import com.hin.flixcomix.ui.home.adapter.AdapterMovie
 import com.hin.flixcomix.ui.home.adapter.AdapterSlide
 import com.hin.flixcomix.ui.home.adapter.OnItemListener
 import com.hin.flixcomix.ui.home.adapter.OnPlayItemListener
+import com.hin.flixcomix.utils.MovieType
 import com.hin.flixcomix.utils.extensions.collectLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -46,7 +48,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             rvSeriesMovie.adapter = adapterSeries
             rvCartoons.adapter = adapterCartoons
             rvTVShows.adapter = adapterTV
+
+            val spacingItemGrid = resources.getDimensionPixelSize(R.dimen.item_grid_spacing)
+            rvNewMovie.addItemDecoration(SpaceItemDecoration(spacingItemGrid))
+            rvSingleMovie.addItemDecoration(SpaceItemDecoration(spacingItemGrid))
+            rvSeriesMovie.addItemDecoration(SpaceItemDecoration(spacingItemGrid))
+            rvCartoons.addItemDecoration(SpaceItemDecoration(spacingItemGrid))
+            rvTVShows.addItemDecoration(SpaceItemDecoration(spacingItemGrid))
         }
+
 
         collectLifecycleFlow(viewModel.uiState) { state ->
             adapter.submitList(state.newMovies)
@@ -116,6 +126,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     fun onClick() {
         binding.imgSearch.setOnClickListener {
             navigateTo(R.id.action_searchFragment)
+        }
+
+        binding.apply {
+            txtMoreNew.setOnClickListener {
+                navigateTo(R.id.action_movieMoreFragment, Bundle().apply {
+                    putString("slug", "new")
+                    putParcelableArrayList("movies", ArrayList(viewModel.uiState.value.newMovies!!))
+                })
+            }
+            txtMoreSing.setOnClickListener {
+                navigateTo(R.id.action_movieMoreFragment, Bundle().apply {
+                    putString("slug", MovieType.PHIM_LE)
+                    putParcelableArrayList("movies", ArrayList(viewModel.uiState.value.singleMovies!!))
+                })
+            }
+            txtMoreSeries.setOnClickListener {
+                navigateTo(R.id.action_movieMoreFragment, Bundle().apply {
+                    putString("slug", MovieType.PHIM_BO)
+                    putParcelableArrayList("movies", ArrayList(viewModel.uiState.value.seriesMovies!!))
+                })
+            }
+            txtMoreTV.setOnClickListener {
+                navigateTo(R.id.action_movieMoreFragment, Bundle().apply {
+                    putString("slug", MovieType.TV_SHOWS)
+                    putParcelableArrayList("movies", ArrayList(viewModel.uiState.value.tvShows!!))
+                })
+            }
+            txtMoreCartoons.setOnClickListener {
+                navigateTo(R.id.action_movieMoreFragment, Bundle().apply {
+                    putString("slug", MovieType.HOAT_HINH)
+                    putParcelableArrayList("movies", ArrayList(viewModel.uiState.value.cartoons!!))
+                })
+            }
         }
     }
 

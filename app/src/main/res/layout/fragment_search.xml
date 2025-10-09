@@ -30,23 +30,43 @@
                 android:src="@drawable/arrow_left"
                 app:backgroundTint="@null" />
 
-            <EditText
-                android:id="@+id/editTxtSearch"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:background="@drawable/selector_edit_text_bg"
-                android:drawableStart="@drawable/search"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/selector_color_edit_text"
-                android:hint="@string/search_movie"
-                android:inputType="text"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="18dp"
-                android:textColor="?attr/text_color_head_1"
-                android:textSize="14dp"
-                tools:ignore="SpUsage" />
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editTxtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@drawable/selector_edit_text_bg"
+                    android:drawableStart="@drawable/search"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/selector_color_edit_text"
+                    android:hint="@string/search_movie"
+                    android:inputType="text"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="18dp"
+                    android:textColor="?attr/text_color_head_1"
+                    android:textSize="14dp"
+                    tools:ignore="SpUsage" />
+
+                <com.hin.flixcomix.ui.custom.image_view.SpinImageView
+                    android:id="@+id/spinLoading"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignTop="@id/editTxtSearch"
+                    android:layout_alignEnd="@id/editTxtSearch"
+                    android:layout_alignBottom="@id/editTxtSearch"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/spin"
+                    android:src="@drawable/spin"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
 
             <ImageButton
                 android:id="@+id/btnFilter"
@@ -59,16 +79,33 @@
                 app:backgroundTint="@null" />
         </LinearLayout>
 
-        <include layout="@layout/layout_search_not_found" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="16dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_movie" />
+
+        <include
+            android:id="@+id/includedNotFound"
+            layout="@layout/layout_search_not_found" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="?attr/color_background_second">
-        <include android:id="@+id/includeFilter" layout="@layout/layout_drawer_end_filter" />
+        android:background="?attr/color_background_second"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/includeFilter"
+            layout="@layout/layout_drawer_end_filter" />
     </FrameLayout>
 
 </FrameLayout>

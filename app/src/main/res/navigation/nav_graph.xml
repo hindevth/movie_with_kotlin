@@ -12,16 +12,22 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hin.flixcomix.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_history"
+        android:name="com.hin.flixcomix.ui.history.HistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/fragment_history" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.hin.flixcomix.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_bookmark"
+        android:name="com.hin.flixcomix.ui.bookmark.BookmarkFragment"
+        android:label="@string/bookmark"
+        tools:layout="@layout/fragment_bookmark" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.hin.flixcomix.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_search"
@@ -48,6 +54,19 @@
         android:id="@+id/navigation_watch_fullscreen"
         android:name="com.hin.flixcomix.ui.watch.FullScreenPlayerFragment"
         tools:layout="@layout/fragment_full_screen_player" />
+
+    <fragment
+        android:id="@+id/navigation_movie_more"
+        android:name="com.hin.flixcomix.ui.movie_more.MovieMoreFragment"
+        tools:layout="@layout/fragment_movie_more" />
+
+    <action
+        android:id="@+id/action_movieMoreFragment"
+        app:destination="@id/navigation_movie_more"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <action
         android:id="@+id/action_watchFullScreenFragment"

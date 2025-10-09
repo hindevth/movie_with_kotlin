@@ -115,6 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/action_drawer_bg"
+        app:backgroundTint="@null"
         android:orientation="horizontal"
         android:paddingHorizontal="24dp"
         android:paddingTop="24dp"

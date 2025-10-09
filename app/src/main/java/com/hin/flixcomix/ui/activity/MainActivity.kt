@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -42,7 +43,10 @@ class MainActivity : BaseActivity() {
         val navController = navHostFragment.navController
 
         val tabOrder = setOf(
-            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+            R.id.navigation_home,
+            R.id.navigation_history,
+            R.id.navigation_bookmark,
+            R.id.navigation_profile
         )
 
         navController.addOnDestinationChangedListener { _, des, _ ->
@@ -54,34 +58,41 @@ class MainActivity : BaseActivity() {
         }
 
         navView.setOnItemSelectedListener { item ->
-            val currentId = navController.currentDestination?.id
+            val currentId = navController.currentDestination?.id ?: return@setOnItemSelectedListener false
+
+            // Nếu đã ở tab hiện tại thì không làm gì
+            if (currentId == item.itemId) {
+                return@setOnItemSelectedListener true
+            }
 
             val currentIndex = tabOrder.indexOf(currentId)
             val targetIndex = tabOrder.indexOf(item.itemId)
 
+            // Kiểm tra debug
+            Timber.i("NavAnimation Current: $currentIndex -> Target: $targetIndex")
 
-            val navOptions = if (currentIndex < targetIndex) {
-
-                NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .setRestoreState(true)
-                    .setPopUpTo(navController.graph.startDestinationId, false, saveState = true)
-                    .setEnterAnim(R.anim.slide_in_right)
-                    .setExitAnim(R.anim.slide_out_left)
-                    .setPopEnterAnim(R.anim.slide_in_left)
-                    .setPopExitAnim(R.anim.slide_out_right)
-                    .build()
-            } else {
-                NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .setRestoreState(true)
-                    .setPopUpTo(navController.graph.startDestinationId, false, saveState = true)
-                    .setEnterAnim(R.anim.slide_in_left)
-                    .setExitAnim(R.anim.slide_out_right)
-                    .setPopEnterAnim(R.anim.slide_in_right)
-                    .setPopExitAnim(R.anim.slide_out_left)
-                    .build()
-            }
+            val navOptions = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+//                .setRestoreState(true)
+                .setPopUpTo(
+                    navController.graph.findStartDestination().id,
+                    inclusive = false,
+                    saveState = true
+                )
+                .apply {
+                    if (targetIndex > currentIndex) {
+                        setEnterAnim(R.anim.slide_in_right)
+                        setExitAnim(R.anim.slide_out_left)
+                        setPopEnterAnim(R.anim.slide_in_left)
+                        setPopExitAnim(R.anim.slide_out_right)
+                    } else {
+                        setEnterAnim(R.anim.slide_in_left)
+                        setExitAnim(R.anim.slide_out_right)
+                        setPopEnterAnim(R.anim.slide_in_right)
+                        setPopExitAnim(R.anim.slide_out_left)
+                    }
+                }
+                .build()
 
             navController.navigate(item.itemId, null, navOptions)
             true
@@ -98,23 +109,6 @@ class MainActivity : BaseActivity() {
 
     override fun getNavController(): NavController {
         return findNavController(R.id.nav_host_fragment_activity_main)
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (ev?.action == MotionEvent.ACTION_DOWN) {
-            val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
-                    v.clearFocus()
-                    // Ẩn bàn phím
-                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.windowToken, 0)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(ev)
     }
 
 

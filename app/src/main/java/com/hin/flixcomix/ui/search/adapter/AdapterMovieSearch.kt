@@ -1,4 +1,4 @@
-package com.hin.flixcomix.ui.home.adapter
+package com.hin.flixcomix.ui.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,13 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hin.flixcomix.data.entities.Movie
 import com.hin.flixcomix.databinding.ItemMovieBinding
 import com.hin.flixcomix.utils.extensions.dpToPx
 
-class AdapterMovie : ListAdapter<Movie, AdapterMovie.ViewHolder>(MovieDiffCallback()) {
+class AdapterMovieSearch : ListAdapter<Movie, AdapterMovieSearch.ViewHolder>(MovieDiffCallback()) {
     private var onItemListener: OnItemListener? = null
 
     override fun onCreateViewHolder(
@@ -43,8 +41,7 @@ class AdapterMovie : ListAdapter<Movie, AdapterMovie.ViewHolder>(MovieDiffCallba
 
             val params = binding.root.layoutParams
             val paramsCard = binding.cardItem.layoutParams
-            params.width = 150.dpToPx(binding.root.context)
-            paramsCard.height = ViewGroup.LayoutParams.MATCH_PARENT
+//            paramsCard.height = ViewGroup.LayoutParams.MATCH_PARENT
             paramsCard.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding.root.layoutParams = params
 

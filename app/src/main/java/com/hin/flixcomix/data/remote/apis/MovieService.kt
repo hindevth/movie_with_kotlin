@@ -39,7 +39,7 @@ interface MovieService {
 
     @GET("v1/api/tim-kiem")
     suspend fun getMovieSearch(
-        @Path("keyword") keyword: String,
+        @Query("keyword") keyword: String,
         @Query("page") page: Int? = 1,
         @Query("limit") limit: Int? = 10,
         @Query("sort_type") sortType: String? = null,

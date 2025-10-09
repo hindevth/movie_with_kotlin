@@ -6,5 +6,5 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseViewModel: ViewModel() {
     protected val _isLoading = MutableLiveData<Boolean>()
-    protected val isLoading: LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 }

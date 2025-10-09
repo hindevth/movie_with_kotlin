@@ -42,7 +42,7 @@ class FullScreenPlayerFragment() :
             binding.exoPlayerVideo.findViewById<ImageButton>(R.id.btn_fullscreen)
                 .setImageResource(R.drawable.collapse)
             binding.exoPlayerVideo.showEpisode()
-            binding.exoPlayerVideo.setTitle(viewModel.movie.value?.name!!)
+            binding.exoPlayerVideo.setTitle(viewModel.movieState.value?.movie?.name!!)
             binding.exoPlayerVideo.setSpeed(viewModel.videoState.value?.playbackSpeed)
             binding.exoPlayerVideo.setExoEventListener(playerListener)
             if (binding.exoPlayerVideo.player == null && state.exoPlayer != null) {

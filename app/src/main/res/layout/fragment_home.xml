@@ -67,6 +67,7 @@
                 tools:ignore="SpUsage" />
 
             <TextView
+                android:id="@+id/txtMoreNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_semibold"
@@ -102,6 +103,7 @@
                 tools:ignore="SpUsage" />
 
             <TextView
+                android:id="@+id/txtMoreSing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_semibold"
@@ -137,6 +139,7 @@
                 tools:ignore="SpUsage" />
 
             <TextView
+                android:id="@+id/txtMoreSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_semibold"
@@ -172,6 +175,7 @@
                 tools:ignore="SpUsage" />
 
             <TextView
+                android:id="@+id/txtMoreCartoons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_semibold"
@@ -207,6 +211,7 @@
                 tools:ignore="SpUsage" />
 
             <TextView
+                android:id="@+id/txtMoreTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_semibold"

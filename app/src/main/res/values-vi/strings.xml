@@ -108,4 +108,6 @@
     <string name="plus">Tăng</string>
     <string name="checked">Checked</string>
     <string name="_00_00">00:00</string>
+    <string name="history">Lịch sử</string>
+    <string name="profile">Người dùng</string>
 </resources>
