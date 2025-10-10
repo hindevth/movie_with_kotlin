@@ -14,7 +14,7 @@
         android:contentDescription="@string/logo"
         android:src="@drawable/logo" />
 
-    <com.hin.flixcomix.ui.custom.image_view.SpinImageView
+    <com.hin.movie.ui.custom.image_view.SpinImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@id/imageView"

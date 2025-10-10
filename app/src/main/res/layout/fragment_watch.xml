@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.hin.flixcomix.ui.watch.WatchViewModel" />
+            type="com.hin.movie.ui.watch.WatchViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.hin.flixcomix.ui.custom.exo_player.ExoPlayerVideo
+                <com.hin.movie.ui.custom.exo_player.ExoPlayerVideo
                     android:id="@+id/exoPlayer"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hin.flixcomix.ui.detail.DetailViewModel" />
+            type="com.hin.movie.ui.detail.DetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -219,7 +219,7 @@
                     android:text="@{viewModel.movie.categories}"
                     android:textColor="?attr/text_color_head_1" />
 
-                <com.hin.flixcomix.ui.custom.text_view.ExpandableTextView
+                <com.hin.movie.ui.custom.text_view.ExpandableTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

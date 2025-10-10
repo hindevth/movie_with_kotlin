@@ -53,7 +53,7 @@
                     android:textSize="14dp"
                     tools:ignore="SpUsage" />
 
-                <com.hin.flixcomix.ui.custom.image_view.SpinImageView
+                <com.hin.movie.ui.custom.image_view.SpinImageView
                     android:id="@+id/spinLoading"
                     android:layout_width="20dp"
                     android:layout_height="20dp"

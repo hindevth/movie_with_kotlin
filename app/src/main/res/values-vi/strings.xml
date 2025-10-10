@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">flixcomix</string>
+    <string name="app_name">Phim</string>
     <string name="title_home">Trang chủ</string>
     <string name="title_dashboard">Bảng điều khiển</string>
     <string name="title_notifications">Thông báo</string>
@@ -110,4 +110,5 @@
     <string name="_00_00">00:00</string>
     <string name="history">Lịch sử</string>
     <string name="profile">Người dùng</string>
+    <string name="default_web_client_id">979112912285-r4no8q0am2c3ncrnceq3frv4eipmgivj.apps.googleusercontent.com</string>
 </resources>

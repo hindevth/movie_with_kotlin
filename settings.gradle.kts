@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "flixcomix"
+rootProject.name = "movie"
 include(":app")

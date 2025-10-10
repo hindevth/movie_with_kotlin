@@ -7,37 +7,37 @@
     <!-- Sign in with social -->
     <fragment
         android:id="@+id/signInWithSocial"
-        android:name="com.hin.flixcomix.ui.sigin_in_social.SignInSocialFragment"
+        android:name="com.hin.movie.ui.sigin_in_social.SignInSocialFragment"
         android:label="Sign in with social" />
 
     <!-- Sign in -->
     <fragment
         android:id="@+id/signInPasswordFragment"
-        android:name="com.hin.flixcomix.ui.sign_in_password.SignInPasswordFragment"
+        android:name="com.hin.movie.ui.sign_in_password.SignInPasswordFragment"
         android:label="Sign Up" />
 
     <!-- Sign up -->
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.hin.flixcomix.ui.sign_up.SignUpFragment"
+        android:name="com.hin.movie.ui.sign_up.SignUpFragment"
         android:label="Sign Up" />
 
     <!-- Forgot password -->
     <fragment
         android:id="@+id/forgotFragment"
-        android:name="com.hin.flixcomix.ui.forgot_password.ForgotPasswordFragment"
+        android:name="com.hin.movie.ui.forgot_password.ForgotPasswordFragment"
         android:label="Forgot Password" />
 
     <!-- Enter PIN -->
     <fragment
         android:id="@+id/enterPinFragment"
-        android:name="com.hin.flixcomix.ui.enter_otp.EnterPinFragment"
+        android:name="com.hin.movie.ui.enter_otp.EnterPinFragment"
         android:label="Enter Pin" />
 
     <!--  New Password  -->
     <fragment
         android:id="@+id/newPasswordFragment"
-        android:name="com.hin.flixcomix.ui.new_password.NewPasswordFragment"
+        android:name="com.hin.movie.ui.new_password.NewPasswordFragment"
         android:label="New Password" />
 
     <!--  Action  -->

@@ -4,14 +4,15 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.hin.flixcomix"
+    namespace = "com.hin.movie"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.hin.flixcomix"
+        applicationId = "com.hin.movie"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -58,6 +59,9 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,4 +97,9 @@ dependencies {
     // --- Logging & Debug ---
     implementation("com.jakewharton.timber:timber:5.0.1")
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
 }
