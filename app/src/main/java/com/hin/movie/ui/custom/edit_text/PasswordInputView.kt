@@ -9,8 +9,10 @@ import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.core.widget.doAfterTextChanged
+import androidx.databinding.BindingAdapter
 import com.hin.movie.R
 import com.hin.movie.databinding.LayoutPasswordInputBinding
+import com.hin.movie.ui.custom.text_view.ExpandableTextView
 
 class PasswordInputView @JvmOverloads constructor(
     context: Context,
@@ -30,8 +32,10 @@ class PasswordInputView @JvmOverloads constructor(
             setOnTouchListener { v, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
                     val editText = v as EditText
-                    val drawableEnd = editText.compoundDrawablesRelative[2] ?: return@setOnTouchListener false
-                    val touchArea = editText.width - editText.paddingEnd - drawableEnd.bounds.width()
+                    val drawableEnd =
+                        editText.compoundDrawablesRelative[2] ?: return@setOnTouchListener false
+                    val touchArea =
+                        editText.width - editText.paddingEnd - drawableEnd.bounds.width()
                     if (event.x >= touchArea) {
                         passwordVisible = !passwordVisible
                         editText.transformationMethod = if (passwordVisible) {
@@ -66,5 +70,9 @@ class PasswordInputView @JvmOverloads constructor(
 
     fun setText(value: String) {
         binding.etPassword.setText(value)
+    }
+
+    fun setHint(value: String) {
+        binding.etPassword.hint = value
     }
 }

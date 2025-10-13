@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
 import com.hin.movie.R
 import com.hin.movie.ui.activity.MainActivity
 import com.hin.movie.ui.auth.AuthActivity
@@ -19,10 +20,14 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
+        val auth = FirebaseAuth.getInstance()
 
         lifecycleScope.launch {
-//            delay(1000)
-            pushActivity(AuthActivity::class, EActivityOptionAnim.FADE)
+            if (auth.currentUser == null){
+                pushActivity(AuthActivity::class, EActivityOptionAnim.FADE)
+            }else{
+                pushActivity(MainActivity::class, EActivityOptionAnim.FADE)
+            }
             finish()
         }
     }

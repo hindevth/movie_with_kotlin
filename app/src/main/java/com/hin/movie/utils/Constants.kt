@@ -110,3 +110,10 @@ object MovieType {
     const val THUYET_MINH = "phim-thuyet-minh"
     const val LONG_TIENG = "phim-long-tieng"
 }
+
+enum class ProvideLogin {
+    GOOGLE,
+    APPLE,
+    FACEBOOK,
+    EMAIL,
+}

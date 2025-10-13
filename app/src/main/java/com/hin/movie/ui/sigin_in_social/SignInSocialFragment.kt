@@ -5,11 +5,16 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.hin.movie.R
 import com.hin.movie.databinding.FragmentSignInSocialBinding
+import com.hin.movie.ui.auth.AuthActivity
 import com.hin.movie.ui.base.BaseFragment
+import com.hin.movie.utils.EActivityOptionAnim
+import com.hin.movie.utils.extensions.collectLifecycleFlow
+import com.hin.movie.utils.extensions.pushActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInSocialFragment : BaseFragment<FragmentSignInSocialBinding>(FragmentSignInSocialBinding::inflate) {
+class SignInSocialFragment :
+    BaseFragment<FragmentSignInSocialBinding>(FragmentSignInSocialBinding::inflate) {
     val viewModel: SignInSocialViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +31,19 @@ class SignInSocialFragment : BaseFragment<FragmentSignInSocialBinding>(FragmentS
             viewModel.signInWithGoogle(requireActivity())
         }
 
+        viewModel.isLoading.observe(viewLifecycleOwner) { value ->
+            binding.frameLayoutLoading.visibility = if (value) View.VISIBLE else View.GONE
+        }
+
+        collectLifecycleFlow(viewModel.uiState) {
+            if (it.isLoginSuccess){
+                (requireActivity() as AuthActivity).pushHome()
+            }
+            if (it.messageError != null){
+                showToast(it.messageError)
+                viewModel.clearMessageError()
+            }
+        }
     }
 
 }

@@ -1,194 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:scrollbars="none"
     tools:context=".ui.sigin_in_social.SignInSocialFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="30dp"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="40dp"
-            android:contentDescription="@string/let_is_you_in"
-            android:src="@drawable/letyou" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="40dp"
-            android:fontFamily="@font/urbanist_bold"
-            android:text="@string/let_s_you_in"
-            android:textColor="?attr/text_color_head_1"
-            android:textSize="48dp"
-            tools:ignore="SpUsage" />
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
 
         <LinearLayout
-            android:id="@+id/btnSignWithFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/color_button_bg_dark"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="19dp">
+            android:orientation="vertical"
+            android:padding="24dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/continue_with_facebook"
-                android:src="@drawable/fb" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@string/let_is_you_in"
+                android:src="@drawable/letyou" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:fontFamily="@font/urbanist_semibold"
-                android:text="@string/continue_with_facebook"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/let_s_you_in"
                 android:textColor="?attr/text_color_head_1"
+                android:textSize="48dp"
+                tools:ignore="SpUsage" />
+
+            <LinearLayout
+                android:id="@+id/btnSignWithFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_button_bg_dark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="19dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/continue_with_facebook"
+                    android:src="@drawable/fb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="@string/continue_with_facebook"
+                    android:textColor="?attr/text_color_head_1"
+                    android:textSize="16dp"
+                    tools:ignore="SpUsage" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSignWithGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/color_button_bg_dark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="19dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/continue_with_google"
+                    android:src="@drawable/gg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="@string/continue_with_google"
+                    android:textColor="?attr/text_color_head_1"
+                    android:textSize="16dp"
+                    tools:ignore="SpUsage" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSignWithApple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_button_bg_dark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="19dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/continue_with_apple"
+                    android:src="@drawable/apple" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="@string/continue_with_apple"
+                    android:textColor="?attr/text_color_head_1"
+                    android:textSize="16dp"
+                    tools:ignore="SpUsage" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="?attr/color_background_div" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="@string/or"
+                    android:textColor="?attr/text_color_span"
+                    android:textSize="18dp"
+                    tools:ignore="SpUsage" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="?attr/color_background_div" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSignInWithPassword"
+                android:backgroundTint="@null"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_bg"
+                android:fontFamily="@font/urbanist_bold"
+                android:stateListAnimator="@null"
+                android:text="@string/sign_in_with_password"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="16dp"
                 tools:ignore="SpUsage" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btnSignWithGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
-            android:background="@drawable/color_button_bg_dark"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="19dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/continue_with_google"
-                android:src="@drawable/gg" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:fontFamily="@font/urbanist_semibold"
-                android:text="@string/continue_with_google"
-                android:textColor="?attr/text_color_head_1"
-                android:textSize="16dp"
-                tools:ignore="SpUsage" />
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/urbanist"
+                    android:text="@string/don_t_have_an_account"
+                    android:textColor="?attr/text_color_span_500"
+                    android:textSize="14dp"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txtToSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/orange"
+                    android:textSize="14dp"
+                    tools:ignore="SpUsage" />
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/btnSignWithApple"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_button_bg_dark"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="19dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/continue_with_apple"
-                android:src="@drawable/apple" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:fontFamily="@font/urbanist_semibold"
-                android:text="@string/continue_with_apple"
-                android:textColor="?attr/text_color_head_1"
-                android:textSize="16dp"
-                tools:ignore="SpUsage" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="?attr/color_background_div" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:fontFamily="@font/urbanist_semibold"
-                android:text="@string/or"
-                android:textColor="?attr/text_color_span"
-                android:textSize="18dp"
-                tools:ignore="SpUsage" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="?attr/color_background_div" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSignInWithPassword"
-            android:backgroundTint="@null"
-            android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/frameLayoutLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/gray_600_70">
+        <com.hin.movie.ui.custom.image_view.SpinImageView
+            android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            app:backgroundTint="@null"
-            android:background="@drawable/button_bg"
-            android:fontFamily="@font/urbanist_bold"
-            android:stateListAnimator="@null"
-            android:text="@string/sign_in_with_password"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            tools:ignore="SpUsage" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/urbanist"
-                android:text="@string/don_t_have_an_account"
-                android:textColor="?attr/text_color_span_500"
-                android:textSize="14dp"
-                tools:ignore="SpUsage" />
-
-            <TextView
-                android:id="@+id/txtToSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/urbanist_semibold"
-                android:text="@string/sign_up"
-                android:textColor="@color/orange"
-                android:textSize="14dp"
-                tools:ignore="SpUsage" />
-        </LinearLayout>
-    </LinearLayout>
-
-</ScrollView>
+            android:layout_gravity="center"
+            android:contentDescription="@string/spin"
+            android:src="@drawable/spin" />
+    </FrameLayout>
+</FrameLayout>
