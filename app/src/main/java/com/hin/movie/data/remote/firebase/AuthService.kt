@@ -2,6 +2,7 @@ package com.hin.movie.data.remote.firebase
 
 import android.app.Activity
 import android.content.Context
+import android.net.Uri
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -9,6 +10,7 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
@@ -20,6 +22,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
+import androidx.core.net.toUri
 
 @Singleton
 class AuthService @Inject constructor(
@@ -103,5 +106,27 @@ class AuthService @Inject constructor(
             .collection("devices")
             .document(fingerprint)
             .set(device).await()
+
+    }
+
+    suspend fun updateProfile(name: String?, avatar: String?) {
+        val currentUser = auth.currentUser
+        val newProfile = userProfileChangeRequest {
+            displayName = name ?: currentUser?.displayName
+            photoUri = avatar?.toUri() ?: currentUser?.photoUrl
+        }
+
+        auth.currentUser?.updateProfile(newProfile)?.await()
+
+        firestore
+            .collection("users")
+            .document(auth.currentUser?.uid!!)
+            .update(
+                mapOf(
+                    "displayName" to (name ?: currentUser?.displayName),
+                    "photoUrl" to (avatar ?: currentUser?.photoUrl)
+                )
+            )
+            .await()
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingVertical="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:contentDescription="@string/logout"
+        android:src="@drawable/logout" />
+
+    <TextView
+        style="@style/text_18_600"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="20dp"
+        android:text="@string/logout"
+        android:textColor="@color/status_error" />
+</LinearLayout>

@@ -27,7 +27,7 @@
 
         <item name="color_primary_orange">@color/orange</item>
         <item name="color_disable_orange">@color/orange_status</item>
-        <item name="color_background_button">@color/gray_700</item>
+        <item name="color_background_button">@color/orange_100</item>
         <item name="color_background_button_status">@color/gray_400</item>
 
         <item name="text_color_gray_subtitle">@color/gray_800</item>

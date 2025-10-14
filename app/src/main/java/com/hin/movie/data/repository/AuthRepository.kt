@@ -20,6 +20,10 @@ class AuthRepository @Inject constructor(private val authService: AuthService) {
         return authService.register(email, password)
     }
 
+    suspend fun updateProfile(name: String?, avatar: String?) {
+        authService.updateProfile(name, avatar)
+    }
+
     suspend fun getCurrentUser() = authService.getCurrentUser()
 
     suspend fun logout() = authService.logout()

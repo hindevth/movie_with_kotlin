@@ -111,4 +111,18 @@
     <string name="history">History</string>
     <string name="profile">Profile</string>
     <string name="default_web_client_id">979112912285-r4no8q0am2c3ncrnceq3frv4eipmgivj.apps.googleusercontent.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="arrow_right">Arrow Right</string>
+    <string name="language">Language</string>
+    <string name="system">System</string>
+    <string name="theme_mode">Theme Mode</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="logout">Logout</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="auto_follow_system">Auto (Follow System)</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
 </resources>

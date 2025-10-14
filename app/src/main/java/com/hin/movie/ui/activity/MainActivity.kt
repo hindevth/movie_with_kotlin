@@ -127,16 +127,11 @@ class MainActivity : BaseActivity() {
         navController.navigate(resId, args, options)
     }
 
-    fun setDrawerContent(layoutRes: ViewBinding) {
-        binding.drawerContainer.removeAllViews()
-        binding.drawerContainer.addView(layoutRes.root)
+    fun showLoading(){
+        binding.frameLayoutLoading.visible()
     }
 
-    fun openDrawer() {
-        binding.drawerLayout.openDrawer(GravityCompat.END)
-    }
-
-    fun closeDrawer() {
-        binding.drawerLayout.closeDrawer(GravityCompat.END)
+    fun hideLoading(){
+        binding.frameLayoutLoading.gone()
     }
 }

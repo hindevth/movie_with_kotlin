@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="status_error">#FFF75555</color>
     <color name="orange">#FFFF6B2D</color>
     <color name="orange_100">#FFFFE3D8</color>
     <color name="orange_300">#FFFFA984</color>
