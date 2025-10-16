@@ -19,4 +19,9 @@
     <attr name="color_background_button_status" format="color" />
     <attr name="color_background_300_dark" format="color" />
     <attr name="color_indicator" format="color" />
+
+    <declare-styleable name="RadioCardButton">
+        <attr name="rcb_text" format="string" />
+        <attr name="rcb_checked" format="boolean" />
+    </declare-styleable>
 </resources>

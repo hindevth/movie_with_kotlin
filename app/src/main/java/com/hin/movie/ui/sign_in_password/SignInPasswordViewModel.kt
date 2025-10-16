@@ -7,7 +7,7 @@ import com.hin.movie.ui.base.BaseViewModel
 import com.hin.movie.ui.sign_in_password.data.UIState
 import com.hin.movie.utils.extensions.isValidEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,7 +25,8 @@ class SignInPasswordViewModel @Inject constructor(private val authRepository: Au
     }
 
     fun updatePassword(password: String) {
-        _uiState.value = _uiState.value.copy(password = password, isPasswordValid = password.length > 4)
+        _uiState.value =
+            _uiState.value.copy(password = password, isPasswordValid = password.length > 4)
         validButton()
     }
 
@@ -48,25 +49,24 @@ class SignInPasswordViewModel @Inject constructor(private val authRepository: Au
                 _uiState.value = _uiState.value.copy(isLoginSuccess = true)
             }.onFailure { exception ->
                 Timber.e(exception)
-                _uiState.value = _uiState.value.copy(messageError = exception.message, isLoginSuccess = false)
+                _uiState.value =
+                    _uiState.value.copy(messageError = exception.message, isLoginSuccess = false)
                 _isLoading.value = false
             }
         }
     }
 
-    fun signInWithGoogle(activity: Activity) {
+    suspend fun signInWithGoogle(activity: Activity) {
         _isLoading.value = true
-        viewModelScope.launch {
-            val data = authRepository.loginGoogle(activity)
-            data.onSuccess { firebaseUser ->
-                Timber.i(firebaseUser?.email)
-                _uiState.value = _uiState.value.copy(isLoginSuccess = true)
-            }.onFailure {
-                Timber.e(it)
-                _uiState.value =
-                    _uiState.value.copy(isLoginSuccess = false, messageError = it.message)
-                _isLoading.value = false
-            }
+        val data = authRepository.loginGoogle(activity)
+        data.onSuccess { firebaseUser ->
+            Timber.i(firebaseUser?.email)
+            _uiState.value = _uiState.value.copy(isLoginSuccess = true)
+        }.onFailure {
+            Timber.e(it)
+            _uiState.value =
+                _uiState.value.copy(isLoginSuccess = false, messageError = it.message)
+            _isLoading.value = false
         }
     }
 }

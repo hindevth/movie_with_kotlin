@@ -1,0 +1,23 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/background"
+    app:backgroundTint="@null"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="16dp">
+
+    <RadioButton
+        android:id="@+id/radio_auto"
+        style="@style/text_18_700"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:buttonTint="@color/orange"
+        android:clickable="false"
+        android:focusable="false"
+        android:layoutDirection="rtl"
+        android:text="@string/auto_follow_system"
+        android:textColor="?attr/text_color_head_1" />
+</androidx.cardview.widget.CardView>

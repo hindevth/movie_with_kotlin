@@ -5,10 +5,12 @@ import com.google.gson.Gson
 import com.hin.movie.data.entities.Setting
 import javax.inject.Singleton
 import androidx.core.content.edit
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 @Singleton
-class SettingDataSource(context: Context?) {
-    private val sharedPreferences = context?.getSharedPreferences("setting_data", Context.MODE_PRIVATE)
+class SettingDataSource @Inject constructor(@ApplicationContext context: Context) {
+    private val sharedPreferences = context.getSharedPreferences("setting_data", Context.MODE_PRIVATE)
     private val gson = Gson()
 
     fun saveSetting(setting: Setting) {

@@ -2,6 +2,7 @@ package com.hin.movie.utils.helper
 
 import android.content.Context
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
 
 object LocaleHelper {
@@ -19,5 +20,11 @@ object LocaleHelper {
         configuration.setLayoutDirection(locale)
 
         return context.createConfigurationContext(configuration)
+    }
+
+    fun changeAppLanguage(languageCode: String) {
+        AppCompatDelegate.setApplicationLocales(
+            androidx.core.os.LocaleListCompat.forLanguageTags(languageCode)
+        )
     }
 }

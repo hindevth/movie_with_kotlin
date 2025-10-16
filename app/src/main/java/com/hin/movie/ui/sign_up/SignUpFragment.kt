@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.hin.movie.R
@@ -16,6 +17,7 @@ import com.hin.movie.utils.extensions.collectLifecycleFlow
 import com.hin.movie.utils.extensions.isValidEmail
 import com.hin.movie.utils.extensions.pushActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -39,7 +41,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         }
 
         binding.btnSignWithGoogle.setOnClickListener {
-            viewModel.signInWithGoogle(requireActivity())
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signInWithGoogle(requireActivity())
+            }
         }
     }
 

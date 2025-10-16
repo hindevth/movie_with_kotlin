@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
+    android:layout_height="match_parent"
     android:background="@drawable/background_bottom_sheet"
-    android:orientation="vertical"
-    android:paddingHorizontal="24dp">
+    android:orientation="vertical">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:layout_width="match_parent"
@@ -23,6 +22,7 @@
         style="@style/text_24_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="24dp"
         android:text="@string/dark_mode"
         android:textAlignment="center"
@@ -32,24 +32,81 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_drag_bottom_sheet" />
 
-    <RadioGroup
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRadioAuto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RadioButton android:id="@+id/radio_auto"
+        android:background="?attr/background"
+        app:backgroundTint="@null"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="16dp">
+
+        <RadioButton
+            android:id="@+id/radioAuto"
+            style="@style/text_18_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/auto_follow_system"/>
-        <RadioButton android:id="@+id/radio_light"
+            android:layout_margin="24dp"
+            android:buttonTint="@color/orange"
+            android:checked="true"
+            android:layoutDirection="rtl"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/auto_follow_system"
+            android:textColor="?attr/text_color_head_1" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRadioLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/background"
+        app:backgroundTint="@null"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="16dp">
+
+        <RadioButton
+            android:id="@+id/radioLight"
+            style="@style/text_18_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/light"/>
-        <RadioButton android:id="@+id/radio_dark"
+            android:layout_margin="24dp"
+            android:buttonTint="@color/orange"
+            android:layoutDirection="rtl"
+            android:text="@string/light"
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="?attr/text_color_head_1" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRadioDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/background"
+        app:backgroundTint="@null"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="16dp">
+
+        <RadioButton
+            android:id="@+id/radioDark"
+            style="@style/text_18_700"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dark"/>
-    </RadioGroup>
+            android:layout_margin="24dp"
+            android:buttonTint="@color/orange"
+            android:layoutDirection="rtl"
+            android:text="@string/dark"
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="?attr/text_color_head_1" />
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

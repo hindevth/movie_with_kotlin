@@ -13,7 +13,7 @@ import com.hin.movie.data.repository.MovieRepository
 import com.hin.movie.ui.base.BaseViewModel
 import com.hin.movie.ui.search.model.FilterState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

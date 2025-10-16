@@ -1,10 +1,14 @@
 package com.hin.movie.ui.activity
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
@@ -29,10 +33,17 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
+            !isDarkThemeOn()
+
         onListener()
 
     }
@@ -86,7 +97,6 @@ class MainActivity : BaseActivity() {
             val targetIndex = tabOrder.indexOf(item.itemId)
 
             // Kiểm tra debug
-            Timber.i("NavAnimation Current: $currentIndex -> Target: $targetIndex")
             if (targetIndex > currentIndex) {
                 replaceTo(item.itemId)
             } else {
@@ -125,6 +135,11 @@ class MainActivity : BaseActivity() {
             .setPopUpTo(navController.graph.startDestinationId, inclusive = true)
             .build()
         navController.navigate(resId, args, options)
+    }
+
+    private fun isDarkThemeOn(): Boolean {
+        val currentMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return currentMode == Configuration.UI_MODE_NIGHT_YES
     }
 
     fun showLoading(){

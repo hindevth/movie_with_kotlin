@@ -60,6 +60,102 @@
         android:name="com.hin.movie.ui.movie_more.MovieMoreFragment"
         tools:layout="@layout/fragment_movie_more" />
 
+    <!-- Sign in with social -->
+    <fragment
+        android:id="@+id/signInWithSocial"
+        android:name="com.hin.movie.ui.sigin_in_social.SignInSocialFragment"
+        android:label="Sign in with social" />
+
+    <!-- Sign in -->
+    <fragment
+        android:id="@+id/signInPasswordFragment"
+        android:name="com.hin.movie.ui.sign_in_password.SignInPasswordFragment"
+        android:label="Sign Up" />
+
+    <!-- Sign up -->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.hin.movie.ui.sign_up.SignUpFragment"
+        android:label="Sign Up" />
+
+    <!-- Forgot password -->
+    <fragment
+        android:id="@+id/forgotFragment"
+        android:name="com.hin.movie.ui.forgot_password.ForgotPasswordFragment"
+        android:label="Forgot Password" />
+
+    <!-- Enter PIN -->
+    <fragment
+        android:id="@+id/enterPinFragment"
+        android:name="com.hin.movie.ui.enter_otp.EnterPinFragment"
+        android:label="Enter Pin" />
+
+    <!--  New Password  -->
+    <fragment
+        android:id="@+id/newPasswordFragment"
+        android:name="com.hin.movie.ui.new_password.NewPasswordFragment"
+        android:label="New Password" />
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.hin.movie.ui.edit_profile.EditProfileFragment" />
+
+    <action
+        android:id="@+id/action_edit_profile"
+        app:destination="@+id/editProfileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_sign_in_social"
+        app:destination="@+id/signInWithSocial"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_sign_in_password"
+        app:destination="@+id/signInPasswordFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_sign_up_password"
+        app:destination="@+id/signUpFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_forgotFragment"
+        app:destination="@id/forgotFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_enterPinFragment"
+        app:destination="@id/enterPinFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_newPassword"
+        app:destination="@id/newPasswordFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
     <action
         android:id="@+id/action_movieMoreFragment"
         app:destination="@id/navigation_movie_more"

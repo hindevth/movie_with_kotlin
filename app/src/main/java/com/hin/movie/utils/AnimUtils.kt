@@ -30,3 +30,16 @@ fun backwardAnim(navController: NavController? = null, inclusive: Boolean = true
     }
     return nav.build()
 }
+
+fun forwardAnimFade(navController: NavController? = null, inclusive: Boolean = true): NavOptions {
+    val nav = NavOptions.Builder()
+        .setEnterAnim(R.anim.fade_in)
+        .setExitAnim(R.anim.fade_out)
+        .setPopEnterAnim(R.anim.fade_in)
+        .setPopExitAnim(R.anim.fade_out)
+
+    navController?.let {
+        nav.setPopUpTo(it.graph.id, inclusive)
+    }
+    return nav.build()
+}

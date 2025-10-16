@@ -54,6 +54,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateBinding: (Layou
         Toast.makeText(requireContext(), message, duration).show()
     }
 
+    fun navController() = (requireActivity() as BaseActivity).getNavController()
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

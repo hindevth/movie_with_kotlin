@@ -7,7 +7,7 @@ import com.hin.movie.data.entities.Movie
 import com.hin.movie.data.repository.MovieRepository
 import com.hin.movie.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

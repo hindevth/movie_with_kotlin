@@ -3,6 +3,8 @@ package com.hin.movie
 import android.app.Application
 import android.content.Context
 import com.google.firebase.FirebaseApp
+import com.google.gson.Gson
+import com.hin.movie.data.entities.Setting
 import com.hin.movie.data.local.SettingDataSource
 import com.hin.movie.utils.PrefixTree
 import com.hin.movie.utils.helper.LocaleHelper
@@ -21,8 +23,11 @@ class MyApp : Application() {
     }
 
     override fun attachBaseContext(base: Context?) {
-        val repo = SettingDataSource(base)
-        val setting = repo.getSetting()
+        val sharedPref = base?.getSharedPreferences("setting_data", MODE_PRIVATE)
+        val setting = sharedPref?.getString("setting", null)?.let {
+            Gson().fromJson(it, Setting::class.java)
+        } ?: Setting("auto", "auto")
+
         val newContext = LocaleHelper.setLocale(base!!, setting.language)
         ThemeHelper.applyTheme(setting.theme)
         super.attachBaseContext(newContext)

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hin.movie.ui.edit_profile.EditProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.edit_profile.EditProfileFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="24dp">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/back"
+                android:src="@drawable/arrow_left" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/text_24_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/edit_profile"
+                android:textAlignment="center"
+                android:textColor="?attr/text_color_head_1" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="24dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/avatar"
+                    imageUrl="@{viewModel.user.photoUrl}"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="10dp"
+                android:padding="5dp"
+                android:contentDescription="@string/edit_profile"
+                android:src="@drawable/edit_square" />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/editTxtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:autofillHints=""
+            android:background="@drawable/selector_edit_text_bg"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/selector_color_edit_text"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            android:text="@{viewModel.user.name}"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="18dp"
+            android:textColor="?attr/text_color_head_1"
+            android:textSize="14dp"
+            tools:ignore="SpUsage" />
+
+        <EditText
+            android:id="@+id/editTxtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/selector_edit_text_bg"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/selector_color_edit_text"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:drawableEnd="@drawable/email"
+            android:alpha="0.7"
+            android:text="@{viewModel.user.email}"
+            android:enabled="false"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="18dp"
+            android:textColor="?attr/text_color_head_1"
+            android:textSize="14dp"
+            tools:ignore="SpUsage" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@null"
+            android:layout_margin="24dp"
+            android:background="@drawable/button_bg"
+            android:text="@string/update"
+            android:textAllCaps="false"
+            style="@style/text_16_700"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</layout>

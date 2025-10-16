@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hin.movie.utils.extensions.dpToPx
@@ -41,7 +42,11 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding>(private val infla
                     bottomSheetDialog.findViewById<View>(R.id.design_bottom_sheet)
                 parentLayout?.setBackgroundColor(Color.TRANSPARENT)
             }
-            dialog.behavior.peekHeight = height.dpToPx(requireContext())
+            if (height > 0){
+                dialog.behavior.peekHeight = height.dpToPx(requireContext())
+            } else {
+                dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
         }
         return dialog
     }

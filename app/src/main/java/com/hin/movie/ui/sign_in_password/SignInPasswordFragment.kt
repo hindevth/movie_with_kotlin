@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.hin.movie.R
 import com.hin.movie.databinding.FragmentSignInPasswordBinding
 import com.hin.movie.ui.auth.AuthActivity
@@ -12,6 +13,7 @@ import com.hin.movie.ui.base.BaseFragment
 import com.hin.movie.utils.extensions.collectLifecycleFlow
 import com.hin.movie.utils.extensions.isValidEmail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignInPasswordFragment : BaseFragment<FragmentSignInPasswordBinding>(
@@ -39,7 +41,9 @@ class SignInPasswordFragment : BaseFragment<FragmentSignInPasswordBinding>(
         }
 
         binding.btnSignWithGoogle.setOnClickListener {
-            viewModel.signInWithGoogle(requireActivity())
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signInWithGoogle(requireActivity())
+            }
         }
     }
 

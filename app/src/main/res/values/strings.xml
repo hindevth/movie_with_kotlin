@@ -123,6 +123,10 @@
     <string name="yes">Yes</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="auto_follow_system">Auto (Follow System)</string>
+    <string name="lang_vietnamese">Vietnamese</string>
+    <string name="lang_english">English</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
+    <string name="full_name">Full Name</string>
+    <string name="update">Update</string>
 </resources>

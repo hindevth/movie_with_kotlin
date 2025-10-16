@@ -3,14 +3,18 @@ package com.hin.movie.ui.sigin_in_social
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.hin.movie.R
 import com.hin.movie.databinding.FragmentSignInSocialBinding
+import com.hin.movie.ui.activity.MainActivity
 import com.hin.movie.ui.auth.AuthActivity
 import com.hin.movie.ui.base.BaseFragment
 import com.hin.movie.utils.EActivityOptionAnim
 import com.hin.movie.utils.extensions.collectLifecycleFlow
 import com.hin.movie.utils.extensions.pushActivity
+import com.hin.movie.utils.forwardAnimFade
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignInSocialFragment :
@@ -28,7 +32,9 @@ class SignInSocialFragment :
         }
 
         binding.btnSignWithGoogle.setOnClickListener {
-            viewModel.signInWithGoogle(requireActivity())
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signInWithGoogle(requireActivity())
+            }
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) { value ->
