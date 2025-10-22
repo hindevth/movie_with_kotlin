@@ -70,7 +70,7 @@
     <string name="genre">Thể loại</string>
     <string name="year">Năm</string>
     <string name="cast_video">Truyền video</string>
-    <string name="bookmark">Lưu</string>
+    <string name="bookmark">Danh sách</string>
     <string name="share">Chia sẻ</string>
     <string name="view_more">Xem thêm</string>
     <string name="less_more">Thu gọn</string>
@@ -130,4 +130,10 @@
     <string name="dark">Dark</string>
     <string name="full_name">Full Name</string>
     <string name="update">Update</string>
+    <string name="your_history_is_empty">Your History is Empty</string>
+    <string name="looks_like_you_haven_t_watched_any_movies">Looks like you haven\'t watched any movies</string>
+    <string name="your_list_is_empty">Your List is Empty</string>
+    <string name="it_seems_that_you_haven_t_added_any_anime_to_the_list">It seems that you haven\'t added any anime to the list</string>
+    <string name="watching">Watching:</string>
+    <string name="delete">Delete</string>
 </resources>

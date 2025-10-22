@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/history"
+        android:src="@drawable/watch_empty" />
+
+    <TextView
+        style="@style/text_24_700"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/your_history_is_empty"
+        android:textAlignment="center"
+        android:textColor="@color/orange" />
+
+    <TextView
+        style="@style/text_18_500"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/looks_like_you_haven_t_watched_any_movies"
+        android:textAlignment="center"
+        android:textColor="?attr/text_color_head_2" />
+</LinearLayout>

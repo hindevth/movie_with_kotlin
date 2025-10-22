@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 import com.hin.movie.data.entities.Setting
 import com.hin.movie.data.local.SettingDataSource
+import com.hin.movie.utils.Constants
 import com.hin.movie.utils.PrefixTree
 import com.hin.movie.utils.helper.LocaleHelper
 import com.hin.movie.utils.helper.ThemeHelper
@@ -23,7 +24,7 @@ class MyApp : Application() {
     }
 
     override fun attachBaseContext(base: Context?) {
-        val sharedPref = base?.getSharedPreferences("setting_data", MODE_PRIVATE)
+        val sharedPref = base?.getSharedPreferences(Constants.CACHE_KEY, MODE_PRIVATE)
         val setting = sharedPref?.getString("setting", null)?.let {
             Gson().fromJson(it, Setting::class.java)
         } ?: Setting("auto", "auto")

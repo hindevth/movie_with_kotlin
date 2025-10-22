@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.bookmark.BookmarkFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:autofillHints=""
+            android:background="@drawable/selector_edit_text_bg"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/selector_color_edit_text"
+            android:drawableStart="@drawable/search"
+            android:hint="@string/search"
+            android:inputType="text"
+            android:visibility="gone"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textColor="?attr/text_color_head_1"
+            android:textSize="14dp"
+            android:imeOptions="actionSearch"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/text_24_700"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="@string/bookmark"
+            android:textColor="?attr/text_color_head_1" />
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/search"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/search"
+            app:tint="?attr/text_color_head_1" />
+    </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/layoutBookmarkEmpty"
+                layout="@layout/layout_bookmark_empty"/>
+
+            <include
+                android:id="@+id/layoutBookmark"
+                layout="@layout/layout_movie_grid"/>
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

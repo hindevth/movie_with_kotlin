@@ -142,6 +142,9 @@ class MainActivity : BaseActivity() {
         return currentMode == Configuration.UI_MODE_NIGHT_YES
     }
 
+    fun showLoading(bool : Boolean){
+        if (bool) showLoading() else hideLoading()
+    }
     fun showLoading(){
         binding.frameLayoutLoading.visible()
     }

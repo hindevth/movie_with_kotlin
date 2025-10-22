@@ -129,4 +129,10 @@
     <string name="dark">Dark</string>
     <string name="full_name">Full Name</string>
     <string name="update">Update</string>
+    <string name="your_history_is_empty">Your History is Empty</string>
+    <string name="looks_like_you_haven_t_watched_any_movies">Looks like you haven\'t watched any movies</string>
+    <string name="your_list_is_empty">Your List is Empty</string>
+    <string name="it_seems_that_you_haven_t_added_any_anime_to_the_list">It seems that you haven\'t added any anime to the list</string>
+    <string name="watching">Watching: %1$d</string>
+    <string name="delete">Delete</string>
 </resources>

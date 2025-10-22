@@ -7,6 +7,7 @@ import com.hin.movie.data.entities.Sort
 object Constants {
     const val APP_DOMAIN_CDN_IMAGE = "https://phimimg.com"
     const val APP_DOMAIN_FRONTEND = "https://phimapi.com"
+    const val CACHE_KEY = "caches"
 
     val sort = listOf(
         Sort("Mới nhất", "desc"),

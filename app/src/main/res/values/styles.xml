@@ -50,6 +50,11 @@
         <item name="android:fontFamily">@font/urbanist_bold</item>
     </style>
 
+    <style name="text_18_500">
+        <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
+        <item name="android:fontFamily">@font/urbanist_medium</item>
+    </style>
+
     <style name="text_18_600">
         <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
         <item name="android:fontFamily">@font/urbanist_semibold</item>

@@ -23,14 +23,22 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import androidx.core.net.toUri
+import com.hin.movie.data.entities.User
+import com.hin.movie.data.local.UserDataSource
 
 @Singleton
 class AuthService @Inject constructor(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
     private val firebaseMessaging: FirebaseMessaging,
+    private val userDataSource: UserDataSource,
     @param:ApplicationContext private val context: Context
 ) {
+
+    companion object {
+        const val COLLECTION_USER = "users"
+        const val COLLECTION_DEVICE = "devices"
+    }
 
     suspend fun loginGoogle(activity: Activity): Result<FirebaseUser?> = try {
         val credentialManager = CredentialManager.create(activity)
@@ -49,7 +57,26 @@ class AuthService @Inject constructor(
 
         val credential = GoogleAuthProvider.getCredential(googleIdToken.idToken, null)
         val authResult = auth.signInWithCredential(credential).await()
-        saveUser(authResult.user)
+
+        val userOld = firestore.collection(COLLECTION_USER).document(authResult.user?.uid!!).get().await()
+
+        if (userOld.exists()) {
+            val userObject = userOld.toObject(User::class.java)
+            if (userObject != null){
+                userDataSource.saveUser(userObject)
+            }
+        }
+        else {
+            saveUser(authResult.user)
+            val user = User(
+                authResult.user?.uid!!,
+                authResult.user?.displayName!!,
+                authResult.user?.email!!,
+                authResult.user?.photoUrl.toString(),
+
+            )
+            userDataSource.saveUser(user)
+        }
         Result.success(authResult.user)
     } catch (e: androidx.credentials.exceptions.NoCredentialException) {
         Result.failure(Exception("Không tìm thấy tài khoản Google hợp lệ trên thiết bị."))
@@ -60,6 +87,24 @@ class AuthService @Inject constructor(
     suspend fun login(email: String, password: String): Result<FirebaseUser?> = try {
         val result = auth.signInWithEmailAndPassword(email, password).await()
         saveUser(result.user, ProvideLogin.EMAIL)
+        val userOld = firestore.collection(COLLECTION_USER).document(result.user?.uid!!).get().await()
+
+        if (userOld.exists()) {
+            val userObject = userOld.toObject(User::class.java)
+            if (userObject != null){
+                userDataSource.saveUser(userObject)
+            }
+        }else {
+            saveUser(result.user, ProvideLogin.EMAIL)
+            val user = User(
+                result.user?.uid!!,
+                result.user?.displayName!!,
+                result.user?.email!!,
+                result.user?.photoUrl.toString(),
+
+                )
+            userDataSource.saveUser(user)
+        }
         Result.success(result.user)
     } catch (e: Exception) {
         Result.failure(e)
@@ -77,6 +122,7 @@ class AuthService @Inject constructor(
 
     fun logout() {
         auth.signOut()
+        userDataSource.clearUser()
     }
 
     suspend fun saveUser(user: FirebaseUser?, providerLogin: ProvideLogin = ProvideLogin.GOOGLE) {
@@ -94,19 +140,18 @@ class AuthService @Inject constructor(
         val userMap = hashMapOf(
             "uid" to user?.uid,
             "email" to user?.email,
-            "displayName" to user?.displayName,
+            "name" to user?.displayName,
             "photoUrl" to user?.photoUrl?.toString(),
             "phoneNumber" to user?.phoneNumber,
         )
 
-        firestore.collection("users").document(user?.uid!!).set(userMap, SetOptions.merge()).await()
+        firestore.collection(COLLECTION_USER).document(user?.uid!!).set(userMap, SetOptions.merge()).await()
 
-        firestore.collection("users")
+        firestore.collection(COLLECTION_USER)
             .document(user.uid)
-            .collection("devices")
+            .collection(COLLECTION_DEVICE)
             .document(fingerprint)
             .set(device).await()
-
     }
 
     suspend fun updateProfile(name: String?, avatar: String?) {
@@ -119,11 +164,11 @@ class AuthService @Inject constructor(
         auth.currentUser?.updateProfile(newProfile)?.await()
 
         firestore
-            .collection("users")
+            .collection(COLLECTION_USER)
             .document(auth.currentUser?.uid!!)
             .update(
                 mapOf(
-                    "displayName" to (name ?: currentUser?.displayName),
+                    "name" to (name ?: currentUser?.displayName),
                     "photoUrl" to (avatar ?: currentUser?.photoUrl)
                 )
             )

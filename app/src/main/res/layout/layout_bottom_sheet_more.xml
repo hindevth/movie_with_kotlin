@@ -5,18 +5,12 @@
     android:background="@drawable/background_bottom_sheet"
     android:paddingHorizontal="24dp"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="340dp">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_width="38dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_drag_bottom_sheet"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="wrap_content"
+        app:tint="?attr/color_background_300_dark"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -12,10 +12,13 @@ import com.hin.movie.ui.custom.edit_text.PasswordInputView
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
     if (!url.isNullOrEmpty()) {
-        Glide.with(view.context)
+        Glide.with(view)
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
+    }else{
+        Glide.with(view).clear(view)
+        view.setImageDrawable(null)
     }
 }
 

@@ -16,7 +16,7 @@ class SpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration(
     }
 }
 
-class GridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean, private val headerNum: Int) : RecyclerView.ItemDecoration() {
+class GridSpacingItemDecoration(private val spanCount: Int = 2, private val spacing: Int, private val includeEdge: Boolean = true, private val headerNum: Int = 0) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

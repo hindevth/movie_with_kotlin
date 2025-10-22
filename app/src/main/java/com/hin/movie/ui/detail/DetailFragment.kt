@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hin.movie.R
 import com.hin.movie.data.entities.Movie
 import com.hin.movie.databinding.FragmentDetailBinding
+import com.hin.movie.ui.activity.MainActivity
 import com.hin.movie.ui.base.BaseFragment
 import com.hin.movie.ui.detail.adapter.AdapterPaperSuggest
 import com.hin.movie.utils.extensions.getParcelableCompat
@@ -46,6 +47,18 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     else -> ContextCompat.getString(requireContext(),R.string.comments)
                 }
             }.apply { attach() }
+
+        viewModel.isBookmark.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.btnBookmark.setImageResource(R.drawable.bookmark_bold)
+            } else {
+                binding.btnBookmark.setImageResource(R.drawable.bookmark)
+            }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            (activity as? MainActivity)?.showLoading(it)
+        }
     }
 
     fun onClick() {
@@ -70,6 +83,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     putParcelableArrayList("servers", ArrayList(servers))
                 }
             })
+        }
+
+        binding.btnBookmark.setOnClickListener {
+            viewModel.toggleBookmark()
         }
     }
 
