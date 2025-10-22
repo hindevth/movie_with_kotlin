@@ -18,7 +18,8 @@
         tools:targetApi="33">
         <activity
             android:name=".ui.activity.MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".ui.auth.AuthActivity"

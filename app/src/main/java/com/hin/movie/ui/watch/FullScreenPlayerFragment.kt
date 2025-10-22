@@ -14,6 +14,8 @@ import com.hin.movie.databinding.FragmentFullScreenPlayerBinding
 import com.hin.movie.ui.base.BaseFragment
 import com.hin.movie.ui.custom.exo_player.ExoEventListener
 import com.hin.movie.ui.custom.exo_player.data.Timer
+import com.hin.movie.utils.extensions.gone
+import com.hin.movie.utils.extensions.visible
 import timber.log.Timber
 
 class FullScreenPlayerFragment() :
@@ -58,7 +60,6 @@ class FullScreenPlayerFragment() :
 
     private val videoListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
-            Timber.e("$playbackState 111")
             val state = viewModel.videoState.value
             if (state?.timer?.value == state?.exoPlayer?.duration && playbackState == Player.STATE_ENDED) {
                 binding.exoPlayerVideo.keepScreenOn = false
@@ -99,6 +100,18 @@ class FullScreenPlayerFragment() :
         // khôi phục orientation khi thoát
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+
+    }
+
+    @OptIn(UnstableApi::class)
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+
+        if (isInPictureInPictureMode){
+            binding.exoPlayerVideo.hideControls()
+        }else{
+            binding.exoPlayerVideo.showControls()
+        }
 
     }
 

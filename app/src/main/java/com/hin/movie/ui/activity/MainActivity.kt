@@ -2,6 +2,7 @@ package com.hin.movie.ui.activity
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hin.movie.R
 import com.hin.movie.databinding.ActivityMainBinding
 import com.hin.movie.ui.base.BaseActivity
+import com.hin.movie.ui.watch.WatchFragment
 import com.hin.movie.utils.backwardAnim
 import com.hin.movie.utils.extensions.dpToPx
 import com.hin.movie.utils.extensions.gone
@@ -107,14 +109,19 @@ class MainActivity : BaseActivity() {
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                when(navController.currentDestination?.id) {
+                when (navController.currentDestination?.id) {
                     R.id.navigation_home -> finish()
                     R.id.navigation_history,
                     R.id.navigation_bookmark,
                     R.id.navigation_profile -> {
-                        replaceTo(R.id.navigation_home, null, backwardAnim(getNavController(), true))
+                        replaceTo(
+                            R.id.navigation_home,
+                            null,
+                            backwardAnim(getNavController(), true)
+                        )
                         navView.selectedItemId = R.id.navigation_home
                     }
+
                     else -> navController.popBackStack()
                 }
             }
@@ -142,14 +149,15 @@ class MainActivity : BaseActivity() {
         return currentMode == Configuration.UI_MODE_NIGHT_YES
     }
 
-    fun showLoading(bool : Boolean){
+    fun showLoading(bool: Boolean) {
         if (bool) showLoading() else hideLoading()
     }
-    fun showLoading(){
+
+    fun showLoading() {
         binding.frameLayoutLoading.visible()
     }
 
-    fun hideLoading(){
+    fun hideLoading() {
         binding.frameLayoutLoading.gone()
     }
 }

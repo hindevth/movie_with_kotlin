@@ -1,6 +1,9 @@
 package com.hin.movie.ui.watch
 
+import android.app.PictureInPictureParams
+import android.os.Build
 import android.os.Bundle
+import android.util.Rational
 import android.view.View
 import androidx.annotation.OptIn
 import androidx.fragment.app.activityViewModels
@@ -20,6 +23,8 @@ import com.hin.movie.ui.custom.exo_player.data.Timer
 import com.hin.movie.ui.watch.adapter.AdapterPaperServer
 import com.hin.movie.utils.extensions.getParcelableCompat
 import com.hin.movie.utils.extensions.getParcelableListCompat
+import com.hin.movie.utils.extensions.gone
+import com.hin.movie.utils.extensions.visible
 import timber.log.Timber
 
 
@@ -83,7 +88,6 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
 
     private val videoListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
-            Timber.e("$playbackState 0000")
             val state = viewModel.videoState.value
             if (state?.timer?.value == state?.exoPlayer?.duration && playbackState == Player.STATE_ENDED) {
                 binding.exoPlayer.keepScreenOn = false
@@ -95,6 +99,11 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
 
     @OptIn(UnstableApi::class)
     fun onClick() {
+        val params = getParamsPip()
+        if (params != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            requireActivity().setPictureInPictureParams(params)
+        }
+
         binding.exoPlayer.setExoEventListener(object : ExoEventListener {
             override fun onBack() {
                 popNavigate()
@@ -122,10 +131,47 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
     }
 
     @OptIn(UnstableApi::class)
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+
+        if (isInPictureInPictureMode){
+            binding.viewPaper.gone()
+            binding.tabLayout.gone()
+            binding.layoutComment.root.gone()
+            binding.exoPlayer.hideControls()
+        }else{
+            binding.viewPaper.visible()
+            binding.tabLayout.visible()
+            binding.layoutComment.root.visible()
+            binding.exoPlayer.showControls()
+        }
+
+    }
+
+    fun getParamsPip(): PictureInPictureParams? {
+        val paramsPIP = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PictureInPictureParams.Builder()
+                .setAspectRatio(Rational(16, 9))
+                .setAutoEnterEnabled(true)
+                .setSeamlessResizeEnabled(false)
+                .build()
+        } else {
+            null
+        }
+
+        return paramsPIP
+    }
+
+    @OptIn(UnstableApi::class)
     override fun onResume() {
         super.onResume()
         viewModel.videoState.value?.exoPlayer?.let { player ->
             PlayerView.switchTargetView(player, null, binding.exoPlayer)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requireActivity().setPictureInPictureParams(
+                PictureInPictureParams.Builder().build()
+            )
         }
     }
 

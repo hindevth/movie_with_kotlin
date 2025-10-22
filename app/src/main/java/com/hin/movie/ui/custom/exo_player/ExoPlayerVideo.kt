@@ -45,34 +45,32 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
 
     private val hideHandler = Handler(Looper.getMainLooper())
     private val hideRunnable = Runnable {
-        binding.root.invisible()
+        hideControls()
     }
 
-    private var updateJob : Job? = null
+    private var updateJob: Job? = null
 
     init {
         useController = false
         binding = CustomExoControlsBinding.inflate(LayoutInflater.from(context), this, true)
         setOnClickListener {
-            if (binding.root.isVisible) {
-                binding.root.invisible()
+            if (binding.layoutBottom.isVisible) {
+                hideControls()
             } else {
                 showControls()
             }
         }
-        Timber.e("Init")
         onClick()
     }
 
     fun setup(player: Player?, fm: FragmentManager) {
-        Timber.e("setup")
         this.player = player
         this.fragmentManager = fm
         this.player?.addListener(onListener)
         initVideo()
     }
 
-    fun initVideo(){
+    fun initVideo() {
         if (player == null) return
         binding.btnVolume.setImageResource(
             if (player?.volume == 0f) R.drawable.volume_off else R.drawable.volume
@@ -89,12 +87,13 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
         binding.txtEndTime.text = player?.duration?.toTimeFormat()
         updateJob?.cancel()
         updateJob = launch {
-            while (true){
+            while (true) {
                 updateTimeBar()
                 delay(1000)
             }
         }
     }
+
     fun cleanup() {
         player?.removeListener(onListener)
         player?.release()
@@ -113,13 +112,46 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
     }
 
     fun showControls() {
-        binding.root.visible()
+        binding.layoutBottom.visible()
+        binding.layoutTop.visible()
+
+        binding.layoutBottom
+            .animate()
+            .translationY(0F)
+            .alpha(1f)
+            .setDuration(300L)
+            .start()
+        binding.layoutTop
+            .animate()
+            .translationY(0F)
+            .alpha(1f)
+            .setDuration(300L)
+            .start()
         hideHandler.removeCallbacks(hideRunnable)
         hideHandler.postDelayed(hideRunnable, 3000)
     }
 
+    fun hideControls(){
+        binding.layoutBottom
+            .animate()
+            .translationY(binding.layoutBottom.height.toFloat())
+            .alpha(0.3f)
+            .setDuration(300L)
+            .withEndAction {
+                binding.layoutBottom.gone()
+            }.start()
+        binding.layoutTop
+            .animate()
+            .translationY(-binding.layoutTop.height.toFloat())
+            .alpha(0.3f)
+            .setDuration(300L)
+            .withEndAction {
+                binding.layoutTop.gone()
+            }.start()
+    }
+
     @OptIn(UnstableApi::class)
-    fun updateTimeBar(){
+    fun updateTimeBar() {
         binding.txtCurrentTime.text = player?.currentPosition?.toTimeFormat()
         binding.exoProgress.setBufferedPosition(player?.bufferedPosition ?: 0L)
         binding.exoProgress.setPosition(player?.currentPosition ?: 0L)
@@ -138,7 +170,7 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
             position: Long,
             canceled: Boolean
         ) {
-            if (!canceled){
+            if (!canceled) {
                 player?.seekTo(position)
             }
         }
@@ -148,14 +180,12 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
     private val onListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             val self = weakSelf.get() ?: return
-            Timber.e("playbackState $playbackState")
             if (playbackState == Player.STATE_READY) {
-                Timber.e("STATE_READY1")
                 self.isReady = true
                 self.binding.txtEndTime.text = player?.duration?.toTimeFormat()
                 self.updateJob?.cancel()
                 self.updateJob = launch {
-                    while (true){
+                    while (true) {
                         updateTimeBar()
                         delay(1000)
                     }
@@ -234,13 +264,15 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
             exoEventListener?.onFullScreen()
         }
     }
-    fun toggleMuted(){
+
+    fun toggleMuted() {
         player?.volume = if (player?.volume == 0f) 1f else 0f
         isMuted = !isMuted
         binding.btnVolume.setImageResource(
             if (isMuted) R.drawable.volume_off else R.drawable.volume
         )
     }
+
     private val bottomSettingListener = object : PlayerSettingListener {
         override fun onTimerSelected(timer: Timer) {
             this@ExoPlayerVideo.timer = timer
