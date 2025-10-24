@@ -33,7 +33,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun loadMovieDetail(slug: String?) {
-        if (slug.isNullOrEmpty() || _movie.value?.content != null) return
+        if (slug.isNullOrEmpty()) return
         _isLoading.value = true
         viewModelScope.launch {
             _isBookmark.postValue(bookmarkRepository.bookmarkIsExits(movie.value!!))

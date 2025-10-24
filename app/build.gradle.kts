@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.hin.movie"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -86,6 +86,12 @@ dependencies {
 
     // --- DataStore (Key-Value storage) ---
     implementation("androidx.datastore:datastore-preferences:1.1.7")
+
+    // --- Database Room ---
+    val versionRoom = "2.8.2"
+    implementation("androidx.room:room-runtime:$versionRoom")
+    kapt("androidx.room:room-compiler:$versionRoom")
+    implementation("androidx.room:room-ktx:$versionRoom")
 
     // --- Dependency Injection (Hilt) ---
     implementation("com.google.dagger:hilt-android:2.57")

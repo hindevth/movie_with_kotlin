@@ -10,7 +10,7 @@ fun Long.toTimeFormat(): String {
     val seconds = totalSeconds % 60
 
     return if (hours > 0) {
-        String.format("%d:%02d:%02d", hours, minutes, seconds)
+        String.format("%02d:%02d:%02d", hours, minutes, seconds)
     } else {
         String.format("%02d:%02d", minutes, seconds)
     }

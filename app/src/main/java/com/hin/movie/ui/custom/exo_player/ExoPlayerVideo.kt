@@ -181,6 +181,7 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
         override fun onPlaybackStateChanged(playbackState: Int) {
             val self = weakSelf.get() ?: return
             if (playbackState == Player.STATE_READY) {
+                showLoading(false)
                 self.isReady = true
                 self.binding.txtEndTime.text = player?.duration?.toTimeFormat()
                 self.updateJob?.cancel()
@@ -191,9 +192,7 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
                     }
                 }
             }
-            if (playbackState == Player.STATE_BUFFERING) {
-                Timber.e("STATE_BUFFERING")
-            }
+            showLoading(playbackState == Player.STATE_BUFFERING)
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -319,7 +318,19 @@ class ExoPlayerVideo @OptIn(UnstableApi::class)
         return if (remainingMillis > 0) remainingMillis / 60000 else 0
     }
 
+    fun showLoading(bool: Boolean) {
+        if (bool) {
+            hideControls()
+            binding.layoutLoading.visible()
+        } else {
+            showControls()
+            binding.layoutLoading.gone()
+        }
+    }
 
+    fun togglePlayAndPause(){
+        if (player?.isPlaying == true) player?.pause() else player?.play()
+    }
 }
 
 interface ExoEventListener {

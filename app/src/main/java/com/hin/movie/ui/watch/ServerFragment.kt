@@ -36,14 +36,23 @@ class ServerFragment : BaseFragment<FragmentServerBinding>(FragmentServerBinding
         )
         adapterEpisode.submitList(episodes)
         adapterEpisode.setListener(episodeListener)
-        if (position == 0) {
-            adapterEpisode.setSelectedItem(0)
+
+        viewModel.movieState.observe(viewLifecycleOwner) { movieState ->
+            if (movieState.currentPositionServer == null && position == 0) {
+                adapterEpisode.setSelectedItem(movieState.currentPositionEpisode)
+            } else if (position == movieState.currentPositionServer) {
+                movieState.currentPositionEpisode.let {
+                    adapterEpisode.setSelectedItem(it)
+                }
+            }
+
         }
     }
 
     private val episodeListener = object : EpisodeListener {
         override fun onClick(item: Episode, position: Int) {
-            viewModel.setCurrentEpisode(item, position)
+            val positionSV = arguments?.getInt(ARG_POSITION)
+            viewModel.setCurrentEpisode(item, position, positionSV ?: 0)
         }
 
     }

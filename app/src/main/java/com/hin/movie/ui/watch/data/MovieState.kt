@@ -9,4 +9,5 @@ data class MovieState(
     val servers: List<Server>? = null,
     val currentEpisode: Episode? = null,
     val currentPositionEpisode: Int = 0,
+    val currentPositionServer: Int? = null,
 )

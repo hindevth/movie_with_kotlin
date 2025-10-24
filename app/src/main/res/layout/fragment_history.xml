@@ -80,7 +80,6 @@
                 android:id="@+id/recyclerViewMovie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="24dp"
                 android:paddingHorizontal="10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"

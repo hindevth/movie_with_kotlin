@@ -5,6 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/layoutLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        >
+        <com.hin.movie.ui.custom.image_view.SpinImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/spin"
+            android:src="@drawable/spin" />
+    </LinearLayout>
     <FrameLayout
         android:id="@+id/layoutTop"
         android:layout_width="match_parent"

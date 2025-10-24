@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hin.movie.R
 import com.hin.movie.databinding.ActivityMainBinding
 import com.hin.movie.ui.base.BaseActivity
+import com.hin.movie.ui.watch.FullScreenPlayerFragment
 import com.hin.movie.ui.watch.WatchFragment
 import com.hin.movie.utils.backwardAnim
 import com.hin.movie.utils.extensions.dpToPx
