@@ -7,12 +7,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.hin.movie.R
-import com.hin.movie.data.entities.Movie
 import com.hin.movie.data.entities.MovieWithEpisodeJoin
 import com.hin.movie.databinding.FragmentHistoryBinding
 import com.hin.movie.ui.base.BaseFragment
 import com.hin.movie.ui.base.GridSpacingItemDecoration
-import com.hin.movie.ui.bookmark.adapter.ItemBookmarkListener
 import com.hin.movie.ui.history.adapter.AdapterHistory
 import com.hin.movie.ui.history.adapter.ItemHistoryListener
 import com.hin.movie.utils.extensions.collectLifecycleFlow
@@ -102,5 +100,10 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(FragmentHistoryBind
 
         }
         isSearching = !isSearching
+    }
+
+    override fun onDestroyView() {
+        adapter.setItemBookmarkListener(null)
+        super.onDestroyView()
     }
 }

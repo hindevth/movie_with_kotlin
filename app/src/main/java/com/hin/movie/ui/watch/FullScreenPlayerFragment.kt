@@ -75,6 +75,11 @@ class FullScreenPlayerFragment() :
         )
 
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         registerReceiver(
             requireContext(), broadcastReceiver,
             IntentFilter(ACTION_STOPWATCH_CONTROL),
@@ -82,6 +87,10 @@ class FullScreenPlayerFragment() :
         )
     }
 
+    override fun onStop() {
+        super.onStop()
+        requireContext().unregisterReceiver(broadcastReceiver)
+    }
     private val videoListener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             val state = viewModel.videoState.value

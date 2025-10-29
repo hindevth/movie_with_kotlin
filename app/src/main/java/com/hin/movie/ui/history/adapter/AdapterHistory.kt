@@ -42,9 +42,9 @@ class AdapterHistory : ListAdapter<MovieWithEpisodeJoin, AdapterHistory.ViewHold
                 itemBookmarkListener?.onClick(item)
             }
 
-            binding.btnDelete.setOnClickListener {
-                itemBookmarkListener?.onClickDelete(item)
-            }
+//            binding.btnDelete.setOnClickListener {
+//                itemBookmarkListener?.onClickDelete(item)
+//            }
 
         }
     }
@@ -62,7 +62,7 @@ class AdapterHistory : ListAdapter<MovieWithEpisodeJoin, AdapterHistory.ViewHold
         holder.bind(getItem(position))
     }
 
-    fun setItemBookmarkListener(listener: ItemHistoryListener) {
+    fun setItemBookmarkListener(listener: ItemHistoryListener?) {
         itemBookmarkListener = listener
     }
 

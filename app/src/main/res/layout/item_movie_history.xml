@@ -77,18 +77,18 @@
                         android:textColor="@color/orange"
                         style="@style/text_10_600" />
                 </androidx.cardview.widget.CardView>
-                <ImageButton
-                    android:id="@+id/btnDelete"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/delete"
-                    android:background="@null"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="end"
-                    app:tint="@color/status_error"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:contentDescription="@string/delete" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/btnDelete"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:src="@drawable/delete"-->
+<!--                    android:background="@null"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    app:tint="@color/status_error"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:contentDescription="@string/delete" />-->
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

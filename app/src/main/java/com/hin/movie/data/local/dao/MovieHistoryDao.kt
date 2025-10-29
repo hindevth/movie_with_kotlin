@@ -48,6 +48,7 @@ interface MovieHistoryDao {
         ) lastEpisode
             ON lastEpisode.movieSlug = e.movieSlug
             AND lastEpisode.lastUpdate = e.updatedAt
+        ORDER BY e.updatedAt DESC
     """
     )
     suspend fun getMovieWithLastEpisode(): List<MovieWithEpisodeJoin>?
@@ -100,11 +101,16 @@ interface MovieHistoryDao {
     @Query("UPDATE episode_history SET isSync = 1 WHERE slug = :slug")
     suspend fun updateSync(slug: String)
 
-    @Query("UPDATE episode_history SET isCompleted = 1, isSync = 0 WHERE slug = :slug")
-    suspend fun updateCompleted(slug: String)
+    @Query("UPDATE episode_history SET isCompleted = 1, isSync = 0, updatedAt = :updatedAt WHERE slug = :slug")
+    suspend fun updateCompleted(slug: String, updatedAt: Long = System.currentTimeMillis())
 
-    @Query("UPDATE episode_history SET currentPositionEpisode = :currentPositionEpisode, isSync = 0 WHERE slug = :slug AND movieSlug = :movieSlug")
-    suspend fun updateCurrentPosition(movieSlug: String, slug: String, currentPositionEpisode: Long)
+    @Query("UPDATE episode_history SET currentPositionEpisode = :currentPositionEpisode, isSync = 0, updatedAt = :updatedAt WHERE slug = :slug AND movieSlug = :movieSlug")
+    suspend fun updateCurrentPosition(
+        movieSlug: String,
+        slug: String,
+        currentPositionEpisode: Long,
+        updatedAt: Long = System.currentTimeMillis()
+    )
 
     @Query("DELETE FROM episode_history")
     suspend fun deleteEpisodeAll()

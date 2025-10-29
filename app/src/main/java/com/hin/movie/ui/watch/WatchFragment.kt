@@ -35,7 +35,6 @@ import com.hin.movie.utils.extensions.getParcelableListCompat
 import com.hin.movie.utils.extensions.gone
 import com.hin.movie.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 private const val ACTION_STOPWATCH_CONTROL = "stopwatch_control"
 private const val EXTRA_CONTROL_TYPE = "control_type"
@@ -87,6 +86,15 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
         init()
     }
 
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(
+            requireContext(), broadcastReceiver,
+            IntentFilter(ACTION_STOPWATCH_CONTROL),
+            ContextCompat.RECEIVER_VISIBLE_TO_INSTANT_APPS
+        )
+    }
+
     private fun init() {
         val movie = arguments?.getParcelableCompat<Movie>("movie")
         val servers = arguments?.getParcelableListCompat<Server>("servers")
@@ -100,11 +108,6 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
                 }.apply { attach() }
 
         }
-        registerReceiver(
-            requireContext(), broadcastReceiver,
-            IntentFilter(ACTION_STOPWATCH_CONTROL),
-            ContextCompat.RECEIVER_VISIBLE_TO_INSTANT_APPS
-        )
     }
 
     private val videoListener = object : Player.Listener {
@@ -253,11 +256,6 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
         }
     }
 
-    override fun onPause() {
-        enterPipMode()
-        super.onPause()
-    }
-
     @OptIn(UnstableApi::class)
     override fun onResume() {
         autoPip()
@@ -265,6 +263,16 @@ class WatchFragment : BaseFragment<FragmentWatchBinding>(FragmentWatchBinding::i
         viewModel.videoState.value?.exoPlayer?.let { player ->
             PlayerView.switchTargetView(player, null, binding.exoPlayer)
         }
+    }
+
+    override fun onPause() {
+        enterPipMode()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        requireContext().unregisterReceiver(broadcastReceiver)
     }
 
     @OptIn(UnstableApi::class)
